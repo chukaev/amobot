@@ -37,7 +37,7 @@ def send_content(message, body):
             'conversation_id': message.from_user.id,
             'sender': {
                 'id': message.from_user.id,
-                'avatar'
+                # 'avatar'
             },
             'message': {
 
