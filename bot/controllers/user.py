@@ -15,7 +15,7 @@ def get_user(user):
 
 
 def _create_user(telegram_user):
-    user = User(id=telegram_user.id, username=telegram_user.username)
+    user = User(id=telegram_user.id)
     new_user_action(user)
     user.save()
     return user
