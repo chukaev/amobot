@@ -3,6 +3,7 @@ from bot.controllers.bot import existed_user_action
 from bot.controllers.user import get_user, new_user_action
 from telebot import types
 from .utils import phone_format, to_main_page
+from bot.controllers.amo_integrator import send_to_amo
 
 
 @bot.message_handler(commands=['start'])
@@ -15,9 +16,10 @@ def handle_start(message):
             new_user_action(user)
 
 
-@bot.message_handler(content_types=['text'])
+@bot.message_handler(content_types=['text', 'audio', 'video', 'video_note', 'voice'])
 def main_handler(message):
     is_existed_user, user = get_user(message.from_user)
+    send_to_amo(user, message)
     if is_existed_user:
         existed_user_action(user, message)
 
