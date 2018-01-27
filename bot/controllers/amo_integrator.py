@@ -7,7 +7,7 @@ import time
 
 def send_to_amo(user, message):
     print(message.from_user.__dict__)
-    print(bot.get_user_profile_photos(message.from_user.id)[0].__dict__)
+    print(bot.get_user_profile_photos(message.from_user.id).photos[0].__dict__)
     # if message.text:
     #     body = message.text
     # elif message.video:
