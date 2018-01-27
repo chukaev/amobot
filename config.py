@@ -8,3 +8,5 @@ EMAIL_HOST_USER = "login in google"
 EMAIL_HOST_PASSWORD = "password in google"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL=True
+
+main_domain = 'http://46.101.26.12'
