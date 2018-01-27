@@ -4,10 +4,14 @@ from config import main_domain
 import json
 import requests
 import time
+from config import token
 
 def send_to_amo(user, message):
     print(message.from_user.__dict__)
-    print(bot.get_user_profile_photos(message.from_user.id).photos[0][0].__dict__)
+    photos = bot.get_user_profile_photos(message.from_user.id).photos
+    for photo in photos:
+        for p in photo:
+            print('https://api.telegram.org/file/bot%s/%s' % (token, bot.get_file(photo.file_id).file_path))
     # if message.text:
     #     body = message.text
     # elif message.video:
