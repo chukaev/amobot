@@ -44,8 +44,8 @@ def send_content(message, body):
         'event_type': 'new_message',
         'payload': {
             'timestamp': int(time.time()),
-            'msgid': str(uuid.uuid4()),
-            'conversation_id': 'c' + str(uuid.uuid4()),
+            'msgid': str(message.message_id),
+            'conversation_id': 'c' + str(message.from_user.id),
             'sender': {
                 'id': str(message.from_user.id),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
