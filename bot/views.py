@@ -6,6 +6,8 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from bot import bot
 from bot.models import User
 from config import *
+from bot.controllers.payment import proceed_payment
+from bot.controllers.amo_integrator import proceed_update
 
 
 def webhook(request):
@@ -40,9 +42,10 @@ def amo_chat_webhook(request):
 
 def amo_webhook(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode())
         proceed_update(data)
         return HttpResponse(content="Ok", status=200)
+
 
 def payment(request):
     get = request.GET
