@@ -34,7 +34,7 @@ def get_body_from_media(media):
 
 def send_content(message, body):
     photos = bot.get_user_profile_photos(message.from_user.id).photos
-    print(photos[0][3])
+    # print(photos[0][2])
     data = {
         'event_type': 'new_message',
         'payload': {
@@ -43,7 +43,7 @@ def send_content(message, body):
             'conversation_id': message.from_user.id,
             'sender': {
                 'id': message.from_user.id,
-                'avatar': telegram_file_link % (token, bot.get_file(photos[0][3].file_id).file_path),
+                'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
                 'name': message.from_user.first_name,
             },
             'message': {
