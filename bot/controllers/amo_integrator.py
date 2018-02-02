@@ -50,7 +50,7 @@ def send_content(message, body):
                 'id': str(message.from_user.id),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
                 'name': message.from_user.first_name,
-                'profile_link': '@valt25',
+                # 'profile_link': '@valt25',
                 'profile': {
                     'phone': 89063235383,
                     'email': 'v.gerasimov@innopolis.ru'
