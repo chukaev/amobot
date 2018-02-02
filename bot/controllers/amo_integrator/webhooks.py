@@ -35,9 +35,9 @@ def _get_lead(update):
 
 
 def _get_lead_details(lead_id):
-    cookie = _authorize()
+    cookies = _authorize()
     url = amo_user_host + amo_api_leads + '?id=%s' % lead_id
-    r = requests.get(url, cookie=cookie)
+    r = requests.get(url, cookies=cookies)
     return r.json()
 
 
@@ -51,7 +51,7 @@ def _authorize():
 def _get_contact_details(contact_id):
     cookies = _authorize()
     url = amo_user_host + amo_api_contact + '?id=%s' % contact_id
-    r = requests.get(url, cookies)
+    r = requests.get(url, cookies=cookies)
     return r.json()['_embedded']['items'][0]
 
 
