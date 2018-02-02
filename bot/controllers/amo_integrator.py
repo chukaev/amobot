@@ -26,7 +26,10 @@ def send_to_amo(user, message):
     else:
         body = 'Unknown type, show this to administrator\n' + str(message.__dict__)
     res = send_content(message, body)
-    print(res)
+    print()
+    print(res[0])
+    print()
+    print(res[1])
 
 
 def get_body_from_media(media):
@@ -40,8 +43,8 @@ def send_content(message, body):
         'event_type': 'new_message',
         'payload': {
             'timestamp': int(time.time()),
-            'msgid': message.message_id,
-            'conversation_id': message.from_user.id,
+            'msgid': str(message.message_id),
+            'conversation_id': str(message.from_user.id),
             'sender': {
                 'id': message.from_user.id,
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
@@ -63,4 +66,4 @@ def send_content(message, body):
     signature = hmac.new(amo_channel_secret.encode(), payload.encode(), 'sha1').hexdigest()
     headers = {'X-Signature': signature, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}
     r = requests.post(url=url, data=payload, headers=headers)
-    return r.text
+    return r.text, data
