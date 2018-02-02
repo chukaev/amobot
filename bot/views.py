@@ -19,5 +19,5 @@ def get_file(request, file_id):
 
 
 def amo_webhook(request):
-    pass
+    print(request.body)
 
