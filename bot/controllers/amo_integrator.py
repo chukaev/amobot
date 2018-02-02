@@ -64,6 +64,6 @@ def send_content(message, body):
     url = amo_chat_host + (amo_new_message_url % scope_id)
     payload = json.dumps(data)
     signature = hmac.new(amo_channel_secret.encode(), payload.encode(), 'sha1').hexdigest()
-    headers = {'X-Signature': signature+'123', 'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}
+    headers = {'X-Signature': signature, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}
     r = requests.post(url=url, data=payload, headers=headers)
     return r.text, data
