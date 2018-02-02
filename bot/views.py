@@ -22,4 +22,5 @@ def amo_webhook(request):
     print(request.body)
     data = json.loads(request.body.decode())
     bot.send_message(data['receiver'], data['text'])
+    return HttpResponse(content="Ok", status=200)
 
