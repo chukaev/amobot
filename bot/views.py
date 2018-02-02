@@ -18,3 +18,6 @@ def get_file(request, file_id):
     return redirect(url)
 
 
+def amo_webhook(request):
+    pass
+
