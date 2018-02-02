@@ -41,6 +41,9 @@ def amo_chat_webhook(request):
 
 
 def amo_webhook(request):
+    print(request.GET)
+    print(request.POST)
+    print(request.body)
     if request.method == 'POST':
         data = json.loads(request.body.decode())
         proceed_update(data)
