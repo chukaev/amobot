@@ -41,13 +41,11 @@ def amo_chat_webhook(request):
 
 
 def amo_webhook(request):
-    print(request.GET)
     print(request.POST)
-    print(request.body.decode())
-    if request.method == 'POST':
-        data = json.loads(request.body.decode())
-        proceed_update(data)
-        return HttpResponse(content="Ok", status=200)
+    # if request.method == 'POST':
+        # data = json.loads(request.body.decode())
+        # proceed_update(data)
+    return HttpResponse(content="Ok", status=200)
 
 
 def payment(request):
