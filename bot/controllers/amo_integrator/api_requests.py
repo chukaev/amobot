@@ -66,7 +66,7 @@ def send_content(message, body):
             'sender': {
                 'id': str(message.from_user.id) + str(api_implementation_version),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
-                'name': user.first_name.replace('.', '') + '.' + user.id,
+                'name': message.from_user.first_name.replace('.', '') + '.' + user.id,
             },
             'message': {
                 'type': 'text',
