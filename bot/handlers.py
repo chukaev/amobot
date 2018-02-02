@@ -1,9 +1,8 @@
 from . import bot
 from bot.controllers.bot import existed_user_action
 from bot.controllers.user import get_user, new_user_action
-from telebot import types
-from .utils import phone_format, to_main_page
-from bot.controllers.amo_integrator import send_to_amo
+from .utils import  to_main_page
+from bot.controllers.amo_integrator.api_requests import send_to_amo
 
 
 @bot.message_handler(commands=['start'])

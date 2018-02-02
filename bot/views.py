@@ -8,7 +8,7 @@ from bot import bot
 from bot.models import User
 from config import *
 from bot.controllers.payment import proceed_payment
-from bot.controllers.amo_integrator import proceed_update
+from bot.controllers.amo_integrator.webhooks import proceed_update
 
 
 def webhook(request):
