@@ -44,7 +44,7 @@ def send_from_user(user, body):
             'sender': {
                 'id': str(user.id) + str(api_implementation_version),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
-                'name': user.first_name.replace('.', '') + '.' + user.id,
+                'name': user.first_name.replace('.', '') + '.' + str(user.id),
             },
             'message': {
                 'type': 'text',
@@ -66,7 +66,7 @@ def send_content(message, body):
             'sender': {
                 'id': str(message.from_user.id) + str(api_implementation_version),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
-                'name': message.from_user.first_name.replace('.', '') + '.' + message.from_user.id,
+                'name': message.from_user.first_name.replace('.', '') + '.' + str(message.from_user.id),
             },
             'message': {
                 'type': 'text',
