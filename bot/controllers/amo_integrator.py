@@ -11,7 +11,6 @@ import hmac
 def send_to_amo(user, message):
     print(message.from_user.__dict__)
     photos = bot.get_user_profile_photos(message.from_user.id).photos
-    print(photos)
     if message.text:
         body = message.text
     elif message.video:
@@ -35,7 +34,7 @@ def get_body_from_media(media):
 
 def send_content(message, body):
     photos = bot.get_user_profile_photos(message.from_user.id).photos
-    print(photos)
+    print(photos[0])
     data = {
         'event_type': 'new_message',
         'payload': {
