@@ -4,8 +4,9 @@ import json
 import requests
 import time
 from config import *
-import hashlib
+from config import api_implementation_version
 import hmac
+
 
 
 def send_to_amo(user, message):
@@ -41,7 +42,7 @@ def send_from_user(user, body):
             'msgid': str(body+user.id+int(time.time())),
             'conversation_id': 'c' + str(user.id),
             'sender': {
-                'id': str(user.id),
+                'id': str(user.id) + str(api_implementation_version),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
                 'name': user.first_name.replace('.', '') + '.' + user.id,
             },
@@ -63,7 +64,7 @@ def send_content(message, body):
             'msgid': str(message.message_id),
             'conversation_id': 'c' + str(message.from_user.id),
             'sender': {
-                'id': str(message.from_user.id),
+                'id': str(message.from_user.id) + str(api_implementation_version),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
                 'name': message.from_user.first_name,
             },
