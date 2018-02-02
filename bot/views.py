@@ -53,7 +53,7 @@ def amo_webhook(request):
 
 def payment(request):
     get = request.GET
-    if 'amount' in get and 'months' in get and 'id' in get:
+    if 'amount' in get and 'id' in get:
         amount = get['amount']
         user_id = get['id']
         user = get_object_or_404(User, id=user_id)
