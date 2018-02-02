@@ -11,9 +11,7 @@ import hmac
 def send_to_amo(user, message):
     print(message.from_user.__dict__)
     photos = bot.get_user_profile_photos(message.from_user.id).photos
-    for photo in photos:
-        for p in photo:
-            print('https://api.telegram.org/file/bot%s/%s' % (token, bot.get_file(p.file_id).file_path))
+    print(photos)
     if message.text:
         body = message.text
     elif message.video:
