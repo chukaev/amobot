@@ -60,4 +60,4 @@ def _get_field(lead, name):
     print(custom_fields)
     for field in custom_fields:
         if field['name'] == name:
-            return field[0]['values']['value']
+            return field['values'][0]['value']
