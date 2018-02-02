@@ -10,7 +10,6 @@ import hmac
 
 def send_to_amo(user, message):
     print(message.from_user.__dict__)
-    photos = bot.get_user_profile_photos(message.from_user.id).photos
     if message.text:
         body = message.text
     elif message.video:
@@ -26,20 +25,36 @@ def send_to_amo(user, message):
     else:
         body = 'Unknown type, show this to administrator\n' + str(message.__dict__)
     res = send_content(message, body)
-    print()
-    print(res[0])
-    print()
-    print(res[1])
 
 
 def get_body_from_media(media):
     return main_domain + reverse('get_file', kwargs={'file_id': media.file_id})
 
 
+def send_from_user(user, body):
+    photos = bot.get_user_profile_photos(user).photos
+    data = {
+        'event_type': 'new_message',
+        'payload': {
+            'timestamp': int(time.time()),
+            'msgid': str(body+user.id+int(time.time())),
+            'conversation_id': 'c' + str(user.id),
+            'sender': {
+                'id': str(user.id),
+                'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
+                'name': user.first_name,
+            },
+            'message': {
+                'type': 'text',
+                'text': body,
+            }
+        }
+    }
+    return send_data(data)
+
+
 def send_content(message, body):
     photos = bot.get_user_profile_photos(message.from_user.id).photos
-    # print(photos[0][2])
-    import uuid
     data = {
         'event_type': 'new_message',
         'payload': {
@@ -50,11 +65,6 @@ def send_content(message, body):
                 'id': str(message.from_user.id),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
                 'name': message.from_user.first_name,
-                # 'profile_link': '@valt25',
-                'profile': {
-                    'phone': 89063235383,
-                    'email': 'v.gerasimov@innopolis.ru'
-                }
             },
             'message': {
                 'type': 'text',
@@ -62,9 +72,17 @@ def send_content(message, body):
             }
         }
     }
+    return send_data(data)
+
+
+def send_data(data):
     url = amo_chat_host + (amo_new_message_url % scope_id)
     payload = json.dumps(data)
     signature = hmac.new(amo_channel_secret.encode(), payload.encode(), 'sha1').hexdigest()
     headers = {'X-Signature': signature, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}
     r = requests.post(url=url, data=payload, headers=headers)
     return r.text, data
+
+
+def proceed_update(update):
+    print(update)

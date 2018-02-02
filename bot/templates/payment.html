@@ -1,0 +1,143 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blank page</title>
+    <meta property="og:title" content="Blank page">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="fb:app_id" content="257953674358265">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="http://tilda.ws/">
+    <link rel="dns-prefetch" href="http://static.tildacdn.com/">
+    <link rel="shortcut icon" href="http://static.tildacdn.com/img/tildafavicon.ico" type="image/x-icon">
+    <!-- Assets -->
+    <link rel="stylesheet" href="{% static 'tilda-grid-3.0.min.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'tilda-blocks-2.12.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'tilda-animation-1.0.min.css' %}" type="text/css" media="all">
+    <script type="text/javascript" id="tildastatscript" async="" src="{% static 'tildastat.min.js' %}"></script>
+    <script type="text/javascript" async="" src="{% static 'watch_ua.js' %}"></script>
+    <script src="{% static 'jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'tilda-scripts-2.8.min.js' %}"></script>
+    <script src="{% static 'tilda-blocks-2.7.js' %}"></script>
+    <script src="{% static 'lazyload-1.3.min.js' %}"></script>
+    <script src="{% static 'tilda-animation-1.0.min.js' %}"></script>
+</head>
+<body class="t-body" style="margin: 0px;"><!--allrecords-->
+<div id="allrecords" class="t-records" data-hook="blocks-collection-content-node" data-tilda-project-id="443479"
+     data-tilda-page-id="2102310" data-tilda-formskey="ab924485f78c05416eb9da3207c49f1b">
+    <div id="rec41291330" class="r t-rec" style=" " data-animationappear="off" data-record-type="131"><!-- T123 -->
+        <div class="t123">
+            <div class="t-container_100 ">
+                <div class="t-width t-width_100 ">
+                    <div id="allrecords" class="t-records" data-hook="blocks-collection-content-node"
+                         data-tilda-page-alias="test_1">
+                        <div id="rec41291051" class="r t-rec t-rec_pt_60 t-rec_pb_120"
+                             style="padding-top:60px;padding-bottom:120px;background-color:#efefef; "
+                             data-record-type="588" data-bg-color="#efefef" data-animationappear="off">
+                            <div class="t588">
+                                <div class="t-container">
+                                    <div class="t-col t-col_10 t-prefix_1 t-align_center">
+{#                                        {% if error %}Вы уже подписаны, ничего оплачивать пока не нужно{% else %}#}
+                                        <div class="t588__title t-heading t-heading_lg t-margin_auto" style=""
+                                             field="title">
+                                            Вы собираетесь оплатить подписку на Telegram бота @help_in_trade_bot сроком
+                                            на {{ months }} мес. {{ amount }} рублей. Убедитесь что это ваш ID в телеграме {{ id }}.
+
+                                        </div>
+
+                                        <div class="t588__descr t-descr t-descr_xl t-margin_auto"
+                                             style="max-width:700px;" field="descr">
+                                            Для оплаты Вы будете переведены на страницу оплаты Яндекс.Денег.
+                                        </div>
+
+
+                                        <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                                            <input type="hidden" name="receiver" value="{{ yandex_money }}">
+                                            <input type="hidden" name="formcomment"
+                                                   value="Оплата подписки сроком на TIME мес.">
+                                            <input type="hidden" name="short-dest" value="short-dest">
+                                            <input type="hidden" name="label" value="{{ id }}.{{ months }}">
+                                            <input type="hidden" name="quickpay-form" value="donate">
+                                            <input type="hidden" name="targets" value="{{ months }}months">
+                                            <input type="hidden" name="sum" value="{{ amount }}" data-type="number">
+                                            <input type="hidden" name="comment"
+                                                   value="">
+                                            <input type="hidden" name="need-fio" value="false">
+                                            <input type="hidden" name="need-email" value="false">
+                                            <input type="hidden" name="need-phone" value="false">
+                                            <input type="hidden" name="need-address" value="false">
+                                            <input type="hidden" name="paymentType" value="AC">
+
+                                            <div class="t588__buttons">
+                                                <div class="t588__buttons-wrapper t-margin_auto">
+                                                    <input type="submit" value="Оплатить картой"
+                                                           class="t588__btn t-btn t588__btn-size_lg "
+                                                           style="color:#000000;background-color:#9ed3de;border-radius:60px; -moz-border-radius:60px; -webkit-border-radius:60px;">
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                            <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                                            <input type="hidden" name="receiver" value="{{ yandex_money }}">
+                                            <input type="hidden" name="formcomment"
+                                                   value="Оплата подписки сроком на TIME мес.">
+                                            <input type="hidden" name="short-dest" value="short-dest">
+                                            <input type="hidden" name="label" value="{{ id }}.{{ months }}">
+                                            <input type="hidden" name="quickpay-form" value="donate">
+                                            <input type="hidden" name="targets" value="{{ months }}months">
+                                            <input type="hidden" name="sum" value="{{ amount }}" data-type="number">
+                                            <input type="hidden" name="comment"
+                                                   value="">
+                                            <input type="hidden" name="need-fio" value="false">
+                                            <input type="hidden" name="need-email" value="false">
+                                            <input type="hidden" name="need-phone" value="false">
+                                            <input type="hidden" name="need-address" value="false">
+                                            <input type="hidden" name="paymentType" value="PC">
+
+                                            <div class="t588__buttons">
+                                                <div class="t588__buttons-wrapper t-margin_auto">
+                                                    <input type="submit" value="Оплатить Яндекс Деньгами"
+                                                           class="t588__btn t-btn t588__btn-size_lg "
+                                                           style="color:#000000;background-color:#9ed3de;border-radius:60px; -moz-border-radius:60px; -webkit-border-radius:60px;">
+
+                                                </div>
+                                            </div>
+                                        </form>
+{#                                        {% endif %}#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--/allrecords--><!-- Stat -->
+<script> (function (d, w, k) {
+    w.setTimeout(function () {
+        var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
+            n.parentNode.insertBefore(s, n)
+        };
+        s.type = "text/javascript";
+        s.id = 'tildastatscript';
+        s.key = k;
+        s.async = !0;
+        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//stat.tildacdn.com/js/tildastat.min.js";
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, !1)
+        } else {
+            f()
+        }
+    }, 2000)
+})(document, window, '51d175c8fb3bfa1f3bf54dd9a6234176');
+if (!window.mainTracker) {
+    window.mainTracker = 'tilda';
+} </script>
+</body>
+</html>

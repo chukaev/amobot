@@ -22,7 +22,7 @@ def _create_user(telegram_user):
 
 
 def new_user_action(user):
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
-    phone_button = types.KeyboardButton('Отправить номер телефона', request_contact=True)
-    markup.add(phone_button)
-    bot.send_message(user.id, info_message, reply_markup=markup)
+    # markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+    # phone_button = types.KeyboardButton('Отправить номер телефона', request_contact=True)
+    # markup.add(phone_button)
+    bot.send_message(user.id, info_message)
