@@ -1,4 +1,5 @@
 import json
+from .handlers import * #it is needed for registering handlers
 
 import telebot
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
@@ -13,7 +14,6 @@ from bot.controllers.amo_integrator import proceed_update
 def webhook(request):
     data = json.loads(request.body.decode('utf-8'))
     update = telebot.types.Update.de_json(data)
-    print(update.__dict__)
     bot.process_new_updates([update])
     return HttpResponse(content="Ok", status=200)
 

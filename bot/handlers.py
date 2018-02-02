@@ -19,7 +19,6 @@ def handle_start(message):
 @bot.message_handler(content_types=['text', 'audio', 'video', 'video_note', 'voice'])
 def main_handler(message):
     is_existed_user, user = get_user(message.from_user)
-    print(message.__dict__)
     send_to_amo(user, message)
     if is_existed_user:
         existed_user_action(user, message)
