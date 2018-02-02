@@ -34,7 +34,7 @@ def get_body_from_media(media):
 
 def send_content(message, body):
     photos = bot.get_user_profile_photos(message.from_user.id).photos
-    print(photos[0])
+    print(photos[0][3])
     data = {
         'event_type': 'new_message',
         'payload': {
