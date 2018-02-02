@@ -25,7 +25,8 @@ def send_to_amo(user, message):
     else:
         body = 'Unknown type, show this to administrator\n' + str(message.__dict__)
     res = send_content(message, body)
-
+    print(res[0])
+    print(res[1])
 
 def get_body_from_media(media):
     return main_domain + reverse('get_file', kwargs={'file_id': media.file_id})
