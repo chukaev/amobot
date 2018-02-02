@@ -55,10 +55,10 @@ def send_content(message, body):
             #         'email': 'v.gerasimov@innopolis.ru'
             #     }
             # },
-            # 'message': {
-            #     'type': 'text',
-            #     'text': body,
-            # }
+            'message': {
+                'type': 'text',
+                'text': body,
+            }
         }
     }
     url = amo_chat_host + (amo_new_message_url % scope_id)
