@@ -46,8 +46,7 @@ def amo_webhook(request):
     # if request.method == 'POST':
         # data = json.loads(request.body.decode())
         # proceed_update(data)
-    id = request.POST['leads[status][0][id]']
-    print(id)
+    proceed_update(update=request.POST)
 
     return HttpResponse(content="Ok", status=200)
 
