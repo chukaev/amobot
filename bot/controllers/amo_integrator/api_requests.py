@@ -43,7 +43,7 @@ def send_from_user(user, body):
             'sender': {
                 'id': str(user.id),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
-                'name': user.first_name,
+                'name': user.first_name.replace('.', '') + '.' + user.id,
             },
             'message': {
                 'type': 'text',
@@ -83,7 +83,3 @@ def send_data(data):
     headers = {'X-Signature': signature, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}
     r = requests.post(url=url, data=payload, headers=headers)
     return r.text, data
-
-
-def proceed_update(update):
-    print(update)
