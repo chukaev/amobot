@@ -61,6 +61,7 @@ def send_content(message, body):
             }
         }
     }
+    data = {}
     url = amo_chat_host + (amo_new_message_url % scope_id)
     payload = json.dumps(data)
     signature = hmac.new(amo_channel_secret.encode(), payload.encode(), 'sha1').hexdigest()
