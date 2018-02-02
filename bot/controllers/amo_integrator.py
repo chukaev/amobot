@@ -28,6 +28,7 @@ def send_to_amo(user, message):
     print(res[0])
     print(res[1])
 
+
 def get_body_from_media(media):
     return main_domain + reverse('get_file', kwargs={'file_id': media.file_id})
 
