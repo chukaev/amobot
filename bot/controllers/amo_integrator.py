@@ -42,7 +42,7 @@ def send_content(message, body):
     data = {
         'event_type': 'new_message',
         'payload': {
-            'timestamp': int(time.time()),
+            # 'timestamp': int(time.time()),
             'msgid': str(message.message_id),
             'conversation_id': str(message.from_user.id),
             'sender': {
@@ -61,7 +61,6 @@ def send_content(message, body):
             }
         }
     }
-    data = {}
     url = amo_chat_host + (amo_new_message_url % scope_id)
     payload = json.dumps(data)
     signature = hmac.new(amo_channel_secret.encode(), payload.encode(), 'sha1').hexdigest()
