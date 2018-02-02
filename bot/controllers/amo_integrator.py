@@ -43,7 +43,7 @@ def send_content(message, body):
         'event_type': 'new_message',
         'payload': {
             'timestamp': int(time.time()),
-            # 'msgid': str(message.message_id),
+            'msgid': str(message.message_id),
             # 'conversation_id': str(message.from_user.id),
             # 'sender': {
             #     'id': message.from_user.id,
