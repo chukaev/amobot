@@ -5,6 +5,7 @@ import requests
 import time
 from config import *
 import hashlib
+import hmac
 
 
 def send_to_amo(user, message):
@@ -52,7 +53,9 @@ def send_content(message, body):
             }
         }
     }
-    url = amo_chat_host + (amo_new_message_url % score_id)
-    headers = {'X-signature': hashlib.sha1(api_key.encode('utf-8')).hexdigest()}
-    r = requests.post(url=url, json=json.dumps(data), headers=headers)
+    url = amo_chat_host + (amo_new_message_url % scope_id)
+    payload = json.dumps(data)
+    signature = hmac.new(amo_channel_secret.encode(), payload.encode(), 'sha1').hexdigest()
+    headers = {'X-Signature': signature, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}
+    r = requests.post(url=url, data=payload, headers=headers)
     return r.text
