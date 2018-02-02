@@ -11,9 +11,9 @@ from bot.controllers.amo_integrator import proceed_update
 
 
 def webhook(request):
-    print(10)
     data = json.loads(request.body.decode('utf-8'))
     update = telebot.types.Update.de_json(data)
+    print(update.__dict__)
     bot.process_new_updates([update])
     return HttpResponse(content="Ok", status=200)
 
