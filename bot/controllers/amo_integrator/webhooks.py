@@ -57,6 +57,7 @@ def _get_contact_details(contact_id):
 
 def _get_field(lead, name):
     custom_fields = lead['custom_fields']
+    print(custom_fields)
     for field in custom_fields:
         if field['name'] == name:
             return field['values']['value']
