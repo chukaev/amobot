@@ -13,6 +13,6 @@ def existed_user_action(user, message):
     if message.video or message.video_note or message.voice:
         markup = types.InlineKeyboardMarkup()
         price = Price.objects.get(id=1)
-        pay = types.InlineKeyboardButton(text=pay_button_text, url=main_domain+reverse('payment')+'?id=%d&amount=%.2f' % (user.id, price.value))
+        pay = types.InlineKeyboardButton(text=pay_button_text, url=main_domain+'?id=%d&amount=%.2f' % (user.id, price.value))
         markup.add(pay)
         bot.send_message(user.id, after_video_message, reply_markup=markup)
