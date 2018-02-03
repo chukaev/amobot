@@ -21,6 +21,6 @@ urlpatterns = [
 
     url(r'^payment$', payment_webhook, name='payment_webhook'),
 
-    url(r'', index, name='index'),
+    url(r'$', index, name='index'),
 
 ]
