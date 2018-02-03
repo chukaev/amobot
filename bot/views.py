@@ -24,6 +24,7 @@ def webhook(request):
 
 
 def payment_webhook(request):
+    print(request.GET)
     if request.method == 'POST':
         print(request.POST)
         try:
