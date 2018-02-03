@@ -19,7 +19,8 @@ urlpatterns = [
 
     url(r'amo/webhook$', amo_webhook, name='amo_webhook'),
 
+    url(r'^payment$', payment_webhook, name='payment_webhook'),
+
     url(r'', index, name='index'),
 
-    url(r'^payment$', payment_webhook, name='payment_webhook'),
 ]
