@@ -3,6 +3,7 @@ from bot import bot
 from messages import payment_get, amo_payment_get
 from config import yandex_notification_secret as notification_secret
 from bot.controllers.amo_integrator.api_requests import send_from_user
+import hashlib
 
 
 def proceed_payment(post_dict):
