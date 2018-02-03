@@ -15,4 +15,4 @@ def existed_user_action(user, message):
         price = Price.objects.get(id=1)
         pay = types.InlineKeyboardButton(text=pay_button_text, url=main_domain+'?id=%d&amount=%.2f' % (user.id, price.value))
         markup.add(pay)
-        bot.send_message(user.id, after_video_message, reply_markup=markup)
+        bot.send_message(user.id, after_video_message % price.value, reply_markup=markup)
