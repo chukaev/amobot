@@ -38,7 +38,7 @@ def send_from_user(user, body):
         'event_type': 'new_message',
         'payload': {
             'timestamp': int(time.time()),
-            'msgid': str(body+user.id+str(int(time.time()))),
+            'msgid': str(body+str(user.id)+str(int(time.time()))),
             'conversation_id': 'c' + str(user.id),
             'sender': {
                 'id': str(user.id) + str(api_implementation_version),
