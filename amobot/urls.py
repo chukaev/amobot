@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from bot import urls as bot_urls
 from django.contrib.auth import urls as auth_urls
+from bot.views import payment
 
 urlpatterns = [
     url(r'admin/', include(bot_urls.urlpatterns)),
     url(r'accounts/', include(auth_urls.urlpatterns)),
+    url(r'^$', payment),
+
 ]

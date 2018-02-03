@@ -3,6 +3,7 @@ from messages import *
 from telebot import types
 from config import main_domain
 from django.urls import reverse
+from bot.models import Price
 
 
 def existed_user_action(user, message):
@@ -11,6 +12,7 @@ def existed_user_action(user, message):
     # user.save()
     if message.video or message.video_note or message.voice:
         markup = types.InlineKeyboardMarkup()
-        pay = types.InlineKeyboardButton(text=pay_button_text, url=main_domain+reverse('payment')+'?id=%d&amount=1' % user.id)
+        price = Price.objects.get(id=1)
+        pay = types.InlineKeyboardButton(text=pay_button_text, url=main_domain+reverse('payment')+'?id=%d&amount=%.2f' % (user.id, price.value))
         markup.add(pay)
         bot.send_message(user.id, after_video_message, reply_markup=markup)

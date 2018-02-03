@@ -1,0 +1,121 @@
+[
+  {
+    "model": "bot.action",
+    "pk": 1,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 1!"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 2,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 2"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 3,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 3"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 4,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 4"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 5,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 5"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 6,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 6"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 7,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 7"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 8,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 8"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 9,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 9"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 10,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 10"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 11,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 11"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 12,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 12"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 13,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 13"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 14,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 14"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 15,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 15"
+    }
+  },
+  {
+    "model": "bot.action",
+    "pk": 16,
+    "fields": {
+      "text": "\u0412\u0430\u0448 \u0442\u0438\u043f 16"
+    }
+  },
+  {
+    "model": "bot.price",
+    "pk": 1,
+    "fields": {
+      "value": 6.0
+    }
+  }
+]

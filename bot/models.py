@@ -1,5 +1,7 @@
 from django.db import models
 
+REVIEW_PRICE_ID = 1
+
 
 class User(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -10,3 +12,7 @@ class User(models.Model):
 class Action(models.Model):
     type_id = models.IntegerField(primary_key=True)
     text = models.TextField()
+
+
+class Price(models.Model):
+    value = models.FloatField()

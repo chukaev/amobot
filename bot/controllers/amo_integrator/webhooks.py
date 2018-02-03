@@ -11,9 +11,9 @@ def proceed_update(update):
         user = _get_user(lead)
         amo_type = _get_field(lead, 'Тип')
         amo_problem = _get_field(lead, 'Проблема')
-        # action = Action.objects.get(amo_type)
-        text = 'Ваш тип %s.\n\n Ваша проблема %s' % (amo_type, amo_problem)
-        bot.send_message(user.id, text)
+        action = Action.objects.get(type_id=amo_type)
+        text = '\n\n Ваша проблема %s' % amo_problem
+        bot.send_message(user.id, action.text + text)
 
 
 def _get_user(lead):
