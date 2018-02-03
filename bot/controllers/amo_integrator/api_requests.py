@@ -8,7 +8,6 @@ from config import api_implementation_version
 import hmac
 
 
-
 def send_to_amo(user, message):
     if message.text:
         body = message.text

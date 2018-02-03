@@ -11,9 +11,10 @@ def proceed_update(update):
         user = _get_user(lead)
         amo_type = _get_field(lead, 'Тип')
         amo_problem = _get_field(lead, 'Проблема')
-        print(amo_type)
         action = Action.objects.get(type_id=amo_type)
         text = '\n\n Ваша проблема %s' % amo_problem
+        user.api_postfix += 1
+        user.save()
         bot.send_message(user.id, action.text + text)
 
 
