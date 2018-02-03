@@ -13,7 +13,7 @@ def proceed_payment(post_dict):
 
         if is_payed:
             label = post_dict['label']
-            user_id = label[0]
+            user_id = label
             user = User.objects.filter(id=user_id).first()
             if user:
                 amount = float(post_dict['withdraw_amount'])
