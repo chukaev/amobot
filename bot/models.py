@@ -6,6 +6,7 @@ REVIEW_PRICE_ID = 1
 class User(models.Model):
     id = models.IntegerField(primary_key=True)
     phone = models.CharField(null=True, max_length=40)
+    first_name = models.CharField(max_length=50)
     state = models.IntegerField(default=0)
 
 
