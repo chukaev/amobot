@@ -12,6 +12,7 @@ urlpatterns = [
 
     url(r'^actions$', action_list, name='action_list'),
     url(r'^actions/(?P<action_id>[0-9]+)/edit$', edit_action, name='edit_action'),
+    url(r'^actions/add$', add_action, name='add_action'),
 
     url(r'^price$', price_list, name='price_list'),
     url(r'^price/(?P<price_id>[0-9]+)/edit$', edit_price, name='edit_price'),

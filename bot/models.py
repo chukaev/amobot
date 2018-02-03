@@ -10,7 +10,7 @@ class User(models.Model):
 
 
 class Action(models.Model):
-    type_id = models.IntegerField(primary_key=True)
+    type_id = models.CharField(unique=True, max_length=40)
     text = models.TextField()
 
 

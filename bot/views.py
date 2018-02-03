@@ -12,7 +12,7 @@ from bot.models import User, Action, Price
 from config import *
 from bot.controllers.payment import proceed_payment
 from bot.controllers.amo_integrator.webhooks import proceed_update
-from bot.controllers.action import action_edit
+from bot.controllers.action import action_edit, action_add
 from bot.controllers.price import edit_price as price_edit
 
 
@@ -47,7 +47,6 @@ def amo_chat_webhook(request):
 
 
 def amo_webhook(request):
-    print(request.POST)
     # if request.method == 'POST':
         # data = json.loads(request.body.decode())
         # proceed_update(data)
@@ -57,7 +56,6 @@ def amo_webhook(request):
 
 
 def payment(request):
-    print(10)
     get = request.GET
     if 'amount' in get and 'id' in get:
         amount = get['amount']
@@ -90,13 +88,23 @@ def action_list(request):
 
 @login_required(login_url='login')
 def edit_action(request, action_id):
-    action = get_object_or_404(Action, type_id=action_id)
+    action = get_object_or_404(Action, id=action_id)
     error_message = None
     if request.method == 'POST':
         status, error_message = action_edit(action, request.POST)
         if status:
             return redirect('action_list')
     return render(request, 'edit_message.html', context={'error': error_message, 'action': action})
+
+
+@login_required(login_url='login')
+def add_action(request):
+    error_message = None
+    if request.method == 'POST':
+        status, error_message = action_add(request.POST)
+        if status:
+            return redirect('action_list')
+    return render(request, 'edit_message.html', context={'error': error_message})
 
 
 @login_required(login_url='login')
