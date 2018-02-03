@@ -8,6 +8,7 @@ class User(models.Model):
     phone = models.CharField(null=True, max_length=40)
     first_name = models.CharField(max_length=50)
     state = models.IntegerField(default=0)
+    api_postfix = models.IntegerField(default=0)
 
 
 class Action(models.Model):

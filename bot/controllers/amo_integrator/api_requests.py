@@ -24,7 +24,7 @@ def send_to_amo(user, message):
         body = get_body_from_media(message.document)
     else:
         body = 'Unknown type, show this to administrator\n' + str(message.__dict__)
-    res = send_content(message, body)
+    res = send_content(user, message, body)
 
 
 
@@ -39,7 +39,7 @@ def send_from_user(user, body):
         'payload': {
             'timestamp': int(time.time()),
             'msgid': str(body+str(user.id)+str(int(time.time()))),
-            'conversation_id': 'c' + str(user.id),
+            'conversation_id': 'c' + str(user.id) + str(user.api_postfix),
             'sender': {
                 'id': str(user.id) + str(api_implementation_version),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
@@ -54,14 +54,14 @@ def send_from_user(user, body):
     return send_data(data)
 
 
-def send_content(message, body):
+def send_content(user, message, body):
     photos = bot.get_user_profile_photos(message.from_user.id).photos
     data = {
         'event_type': 'new_message',
         'payload': {
             'timestamp': int(time.time()),
             'msgid': str(message.message_id),
-            'conversation_id': 'c' + str(message.from_user.id),
+            'conversation_id': 'c' + str(message.from_user.id) + str(user.api_postfix),
             'sender': {
                 'id': str(message.from_user.id) + str(api_implementation_version),
                 'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
