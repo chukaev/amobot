@@ -42,6 +42,7 @@ def get_file(request, file_id):
 
 
 def amo_chat_webhook(request):
+    print(request.POST)
     data = json.loads(request.body.decode())
     bot.send_message(data['receiver'], data['text'])
     return HttpResponse(content="Ok", status=200)
