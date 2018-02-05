@@ -9,13 +9,13 @@ def proceed_update(update):
     lead = _get_lead(update)
     if lead:
         user = _get_user(lead)
-        amo_type = _get_field(lead, 'Тип')
-        amo_problem = _get_field(lead, 'Проблема')
+        amo_type = _get_field(lead, 'Тип')[0]
+        amo_problems = _get_field(lead, 'Проблема')
         action = Action.objects.get(type_id=amo_type)
-        text = '\n\n Ваша проблема %s' % amo_problem
+        text_problems = _get_problem_text(amo_problems)
         user.api_postfix += 1
         user.save()
-        bot.send_message(user.id, action.text + text)
+        bot.send_message(user.id, action.text + text_problems)
 
 
 def _get_user(lead):
@@ -59,6 +59,17 @@ def _get_contact_details(contact_id):
 
 def _get_field(lead, name):
     custom_fields = lead['custom_fields']
+    result = []
     for field in custom_fields:
         if field['name'] == name:
-            return field['values'][0]['value']
+            values = field['values']
+            for val in values:
+                result.append(val['value'])
+    return result
+
+def _get_problem_text(amo_problems):
+    result = '\n\nВаши проблемы:'
+    for problem in amo_problems:
+        result+= problem + ' '
+    return result
+
