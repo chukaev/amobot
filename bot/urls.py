@@ -12,11 +12,11 @@ urlpatterns = [
     url(r'amochat/' + scope_id, amo_chat_webhook, name='amochat_webhook'),
 
     url(r'^types', action_list, {'Type': TypeAction}, name='types_list'),
-    url(r'^types/(?P<action_id>[0-9]+)/edit$', {'Type': TypeAction}, edit_action, name='edit_type_action'),
+    url(r'^types/(?P<action_id>[0-9]+)/edit$', edit_action, {'Type': TypeAction}, name='edit_type_action'),
     url(r'^types/add$', add_action, {'Type': TypeAction}, name='add_type_action'),
 
     url(r'^problems', action_list, {'Type': ProblemAction}, name='problem_list'),
-    url(r'^problems/(?P<action_id>[0-9]+)/edit$', {'Type': ProblemAction}, edit_action, name='edit_problem_action'),
+    url(r'^problems/(?P<action_id>[0-9]+)/edit$', edit_action, {'Type': ProblemAction}, name='edit_problem_action'),
     url(r'^problems/add$', add_action, {'Type': ProblemAction}, name='add_problem_action'),
 
     url(r'^price$', price_list, name='price_list'),

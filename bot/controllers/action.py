@@ -1,4 +1,3 @@
-from bot.models import Action
 from django.db.utils import IntegrityError
 
 
