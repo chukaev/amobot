@@ -70,7 +70,7 @@ def _get_field(lead, name):
 
 def _get_problem_text(amo_problems):
     problems = _get_problems(amo_problems)
-    result = ''
+    result = '\n\n'
     for problem in problems:
         result += problem.text + '\n\n'
     return result
