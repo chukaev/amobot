@@ -99,7 +99,7 @@ def edit_action(request, action_id, Type):
     if request.method == 'POST':
         status, error_message = action_edit(action, request.POST)
         if status:
-            return redirect('action_list')
+            return redirect('index')
     return render(request, 'edit_message.html', context={'error': error_message, 'action': action})
 
 
