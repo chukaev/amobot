@@ -11,10 +11,10 @@ def action_edit(action, post_dict):
             action.text = text
         else:
             error = True
-            action += 'Text field is empty\n'
+            error_message += 'Text field is empty\n'
     else:
         error = True
-        action += 'Text field is not specified\n'
+        error_message += 'Text field is not specified\n'
 
     if 'action_id' in post_dict:
         action_id = post_dict['action_id']
@@ -22,10 +22,10 @@ def action_edit(action, post_dict):
             action.action_id = action_id
         else:
             error = True
-            action += 'action_id field is empty\n'
+            error_message += 'action_id field is empty\n'
     else:
         error = True
-        action += 'action_id field is not specified\n'
+        error_message += 'action_id field is not specified\n'
 
     if error:
         return False, error_message
