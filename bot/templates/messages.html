@@ -38,10 +38,10 @@
                             <td class="c-table__cell">{{ action.text }}</td>
                             <td class="c-table__cell u-text-right">
                                 {% if type %}
-                                    <a href="{% url 'edit_type_action' action.action_id %}"><span
+                                    <a href="{% url 'edit_type_action' action.id %}"><span
                                             class="c-badge c-badge--small c-badge--warning">Изменить</span></a>
                                 {% else %}
-                                    <a href="{% url 'edit_problem_action' action.action_id %}"><span
+                                    <a href="{% url 'edit_problem_action' action.id %}"><span
                                             class="c-badge c-badge--small c-badge--warning">Изменить</span></a>
                                 {% endif %}
                             </td>
