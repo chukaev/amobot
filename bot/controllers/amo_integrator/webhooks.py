@@ -1,4 +1,4 @@
-from bot.models import User, Action
+from bot.models import User, TypeAction, ProblemAction
 from bot import bot
 import requests
 from requests.utils import dict_from_cookiejar
@@ -11,7 +11,7 @@ def proceed_update(update):
         user = _get_user(lead)
         amo_type = _get_field(lead, 'Тип')[0]
         amo_problems = _get_field(lead, 'Проблема')
-        action = Action.objects.get(type_id=amo_type)
+        action = TypeAction.objects.get(action_id=amo_type)
         text_problems = _get_problem_text(amo_problems)
         user.api_postfix += 1
         user.save()
@@ -67,9 +67,21 @@ def _get_field(lead, name):
                 result.append(val['value'])
     return result
 
+
 def _get_problem_text(amo_problems):
-    result = '\n\nВаши проблемы:'
-    for problem in amo_problems:
-        result+= problem + ' '
+    problems = _get_problems(amo_problems)
+    result = ''
+    for problem in problems:
+        result += problem.text + '\n\n'
     return result
 
+
+def _get_problems(amo_problems):
+    result = []
+    for amo_problem in amo_problems:
+        try:
+            problem = ProblemAction.objects.get(action_id=amo_problem)
+            result.append(problem)
+        except:
+            pass
+    return result

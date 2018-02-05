@@ -17,16 +17,16 @@ def action_edit(action, post_dict):
         error = True
         action += 'Text field is not specified\n'
 
-    if 'type_id' in post_dict:
-        type_id = post_dict['type_id']
-        if type_id != '':
-            action.type_id = type_id
+    if 'action_id' in post_dict:
+        action_id = post_dict['action_id']
+        if action_id != '':
+            action.action_id = action_id
         else:
             error = True
-            action += 'Type_id field is empty\n'
+            action += 'action_id field is empty\n'
     else:
         error = True
-        action += 'Type_id field is not specified\n'
+        action += 'action_id field is not specified\n'
 
     if error:
         return False, error_message
@@ -38,8 +38,8 @@ def action_edit(action, post_dict):
             return False, error_message
 
 
-def action_add(post_dict):
-    action = Action()
+def action_add(post_dict, Type):
+    action = Type()
     error = False
     error_message = ''
 
@@ -54,16 +54,16 @@ def action_add(post_dict):
         error = True
         action += 'Text field is not specified\n'
 
-    if 'type_id' in post_dict:
-        type_id = post_dict['type_id']
-        if type_id != '':
-            action.type_id = type_id
+    if 'action_id' in post_dict:
+        action_id = post_dict['action_id']
+        if action_id != '':
+            action.action_id = action_id
         else:
             error = True
-            action += 'Type_id field is empty\n'
+            action += 'action_id field is empty\n'
     else:
         error = True
-        action += 'Type_id field is not specified\n'
+        action += 'action_id field is not specified\n'
 
     if error:
         return False, error_message

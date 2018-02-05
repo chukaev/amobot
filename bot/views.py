@@ -8,7 +8,7 @@ import telebot
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 from bot import bot
-from bot.models import User, Action, Price
+from bot.models import User, TypeAction, Price
 from config import *
 from bot.controllers.payment import proceed_payment
 from bot.controllers.amo_integrator.webhooks import proceed_update
@@ -84,14 +84,17 @@ def payment(request):
 
 
 @login_required(login_url='login')
-def action_list(request):
-    actions = Action.objects.all()
-    return render(request, "messages.html", context={'actions': actions})
+def action_list(request, Type):
+    actions = Type.objects.all()
+    reurned_type = False
+    if Type == TypeAction:
+        reurned_type = True
+    return render(request, "messages.html", context={'actions': actions, 'type': reurned_type})
 
 
 @login_required(login_url='login')
-def edit_action(request, action_id):
-    action = get_object_or_404(Action, id=action_id)
+def edit_action(request, action_id, Type):
+    action = get_object_or_404(Type, id=action_id)
     error_message = None
     if request.method == 'POST':
         status, error_message = action_edit(action, request.POST)
@@ -101,12 +104,12 @@ def edit_action(request, action_id):
 
 
 @login_required(login_url='login')
-def add_action(request):
+def add_action(request, Type):
     error_message = None
     if request.method == 'POST':
-        status, error_message = action_add(request.POST)
+        status, error_message = action_add(request.POST, Type)
         if status:
-            return redirect('action_list')
+            return redirect('index')
     return render(request, 'edit_message.html', context={'error': error_message})
 
 

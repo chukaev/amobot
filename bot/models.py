@@ -11,8 +11,13 @@ class User(models.Model):
     api_postfix = models.IntegerField(default=0)
 
 
-class Action(models.Model):
-    type_id = models.CharField(unique=True, max_length=40)
+class TypeAction(models.Model):
+    action_id = models.CharField(unique=True, max_length=40)
+    text = models.TextField()
+
+
+class ProblemAction(models.Model):
+    action_id = models.CharField(unique=True, max_length=40)
     text = models.TextField()
 
 
