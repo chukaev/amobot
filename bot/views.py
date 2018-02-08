@@ -8,12 +8,13 @@ import telebot
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 from bot import bot
-from bot.models import User, TypeAction, Price
+from bot.models import User, TypeAction, Price, Question
 from config import *
 from bot.controllers.payment import proceed_payment
 from bot.controllers.amo_integrator.webhooks import proceed_update
 from bot.controllers.action import action_edit, action_add
 from bot.controllers.price import edit_price as price_edit
+from bot.controllers.question import question_edit
 
 
 def webhook(request):
@@ -131,3 +132,20 @@ def edit_price(request, price_id):
 @login_required(login_url='login')
 def index(request):
     return redirect('price_list')
+
+
+@login_required(login_url='login')
+def question_list(request):
+    questions = Question.objects.all()
+    return render(request, "messages.html", context={'actions': questions})
+
+
+@login_required(login_url='login')
+def edit_question(request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+    error_message = None
+    if request.method == 'POST':
+        status, error_message = question_edit(question, request.POST)
+        if status:
+            return redirect('index')
+    return render(request, 'edit_message.html', context={'error': error_message, 'question': question})

@@ -1,5 +1,7 @@
 from bot.models import User
-from config import pipeline_id
+from config import pipeline_id, amo_api_leads, amo_user_host
+import requests
+from .utils import authorize
 
 
 def create_lead(contact):
@@ -24,11 +26,23 @@ def create_lead(contact):
                             'subtype': 'country'
                         }
                     ]
+                },
+                {
+                    'id': '1234567',
+                    'values': [
+                        {
+                            'value': user.username,
+                        },
+                    ]
                 }
 
             ]
         }]
     }
+    cookies = authorize()
+    url = amo_user_host + amo_api_leads
+    r = requests.post(url, json=data, cookies=cookies)
+    print(r.text)
 
 
 def _get_user(contact):

@@ -1,0 +1,30 @@
+[
+  {
+    "model": "bot.question",
+    "pk": 1,
+    "fields": {
+      "text": "first question"
+    }
+  },
+  {
+    "model": "bot.question",
+    "pk": 2,
+    "fields": {
+      "text": "second question"
+    }
+  },
+  {
+    "model": "bot.question",
+    "pk": 3,
+    "fields": {
+      "text": "third question"
+    }
+  },
+  {
+    "model": "bot.question",
+    "pk": 4,
+    "fields": {
+      "text": "forth question"
+    }
+  }
+]

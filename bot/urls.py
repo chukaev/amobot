@@ -22,6 +22,9 @@ urlpatterns = [
     url(r'^price$', price_list, name='price_list'),
     url(r'^price/(?P<price_id>[0-9]+)/edit$', edit_price, name='edit_price'),
 
+    url(r'^question$', question_list, name='question_list'),
+    url(r'^question/(?P<question_id>[0-9]+)/edit$', edit_question, name='edit_question'),
+
     url(r'amo/webhook$', amo_webhook, name='amo_webhook'),
     url(r'amo/webhook/delete$', amo_webhook, name='amo_delete_webhook'),
 

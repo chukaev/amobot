@@ -9,6 +9,9 @@ class User(models.Model):
     first_name = models.CharField(max_length=50)
     state = models.IntegerField(default=0)
     api_postfix = models.IntegerField(default=0)
+    username = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    country = models.CharField(max_length=20)
 
 
 class TypeAction(models.Model):
@@ -23,3 +26,7 @@ class ProblemAction(models.Model):
 
 class Price(models.Model):
     value = models.FloatField()
+
+
+class Question(models.Model):
+    text = models.TextField()
