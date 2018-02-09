@@ -1,6 +1,7 @@
 import os
 import django
-
+import sys
+sys.path.append("/~/amobot/")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "amobot.settings")
 django.setup()
 
