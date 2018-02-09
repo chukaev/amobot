@@ -13,3 +13,19 @@ def to_main_page(user, message='✅'):
 
 def phone_format(phone):
     return '%s-%s-%s-%s-%s' % (phone[:-10], phone[-10:-7], phone[-7:-4], phone[-4:-2], phone[-2:])
+
+
+countries = {
+    'россия': 'RU',
+    'украина': 'UA',
+    'грузия': 'GE',
+    'белоруссия': 'BY',
+    'казахстан': 'КZ'
+}
+
+
+def markup_for_country():
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    for country, code in countries.items():
+        markup.add(types.KeyboardButton(country))
+    return markup

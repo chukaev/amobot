@@ -2,6 +2,7 @@ from bot.models import User
 from telebot import types
 from bot import bot
 from messages import first_message
+from bot.utils import markup_for_country
 
 
 def get_user(user):
@@ -28,4 +29,6 @@ def new_user_action(user):
     # markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     # phone_button = types.KeyboardButton('Отправить номер телефона', request_contact=True)
     # markup.add(phone_button)
-    bot.send_message(user.id, first_message % user.username)
+    bot.send_message(user.id, first_message % user.username, reply_markup=markup_for_country())
+
+
