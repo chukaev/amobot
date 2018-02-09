@@ -78,6 +78,8 @@ def _accept_uid(uid):
     return r.json()['data']['leads'][0]
 
 if __name__ == '__main__':
+    import os
+    print(os.getcwd())
     unsorted_list = _get_unsorted_leads()
     for unsorted in unsorted_list:
         _accept(unsorted)
