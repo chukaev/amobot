@@ -137,7 +137,7 @@ def index(request):
 @login_required(login_url='login')
 def question_list(request):
     questions = Question.objects.all()
-    return render(request, "messages.html", context={'actions': questions})
+    return render(request, "questions.html", context={'questions': questions})
 
 
 @login_required(login_url='login')
@@ -148,4 +148,4 @@ def edit_question(request, question_id):
         status, error_message = question_edit(question, request.POST)
         if status:
             return redirect('index')
-    return render(request, 'edit_message.html', context={'error': error_message, 'question': question})
+    return render(request, 'edit_question.html', context={'error': error_message, 'question': question})
