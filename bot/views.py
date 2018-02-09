@@ -147,5 +147,5 @@ def edit_question(request, question_id):
     if request.method == 'POST':
         status, error_message = question_edit(question, request.POST)
         if status:
-            return redirect('index')
+            return redirect('question_list')
     return render(request, 'edit_question.html', context={'error': error_message, 'question': question})
