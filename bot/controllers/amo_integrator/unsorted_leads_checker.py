@@ -1,11 +1,3 @@
-import os
-import django
-import sys
-sys.path.append("~/amobot/")
-print(os.getcwd())
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "amobot.settings")
-django.setup()
-
 from config import amo_user_host, amo_api_incoming_leads, amo_user_hash, amo_user_login, amo_chat_code, amo_api_incoming_leads_accept, amo_user_id, amo_api_leads, pipeline_id
 from bot.controllers.amo_integrator.utils import authorize
 from bot.models import User
@@ -79,7 +71,8 @@ def _accept_uid(uid):
     print(r.json())
     return r.json()['data']['leads'][0]
 
-if __name__ == '__main__':
+
+def run_check():
 
     unsorted_list = _get_unsorted_leads()
     for unsorted in unsorted_list:
