@@ -21,7 +21,6 @@ def existed_user_action(user, message):
     user.save()
 
 
-
 def choose_country(user, message):
     country_try = message.text
     if country_try in countries:
