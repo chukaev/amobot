@@ -49,8 +49,10 @@ def video_action(user, message):
             bot.send_message(user.id, question.text)
             user.state += 1
     else:
-        markup = types.InlineKeyboardMarkup()
-        pay = types.InlineKeyboardButton(text=pay_button_text,
+        if message.video or message.video_note or message.voice:
+
+            markup = types.InlineKeyboardMarkup()
+            pay = types.InlineKeyboardButton(text=pay_button_text,
                                          url=main_domain + '?id=%d&amount=%.2f' % (user.id, 1000))
-        markup.add(pay)
-        bot.send_message(user.id, after_video_message % 1000, reply_markup=markup)
+            markup.add(pay)
+            bot.send_message(user.id, after_video_message % 1000, reply_markup=markup)
