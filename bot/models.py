@@ -12,7 +12,7 @@ class User(models.Model):
     username = models.CharField(max_length=50, default='Пусто')
     city = models.CharField(max_length=50, default='Москва')
     country = models.CharField(max_length=20, default='Россия')
-    lead_id = models.CharField(max_length=20)
+    lead_id = models.CharField(max_length=20, null=True)
 
 
 class TypeAction(models.Model):
