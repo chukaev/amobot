@@ -21,7 +21,8 @@ def proceed_update(update):
                 need_check = _get_field(lead, 'Проверка нужна')[0]
             except IndexError:
                 need_check = False
-            if need_check == '1' or user.send_review:
+            send = True if user.send_review else need_check=='1'
+            if send:
                 user.api_postfix += 1
                 user.send_review = False
                 user.save()
