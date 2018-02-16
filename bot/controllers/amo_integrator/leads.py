@@ -1,17 +1,19 @@
 from bot.models import User
-from config import pipeline_id, amo_api_leads, amo_user_host
+from config import amo_api_leads, amo_user_host
 import requests
 from .utils import authorize
 from time import time
+from bot.models import Price
 
 
 def update_lead(user):
     print(user.__dict__)
+    price = Price.objects.get(id=1)
     data = {
         'update': [
             {
                 'id': user.lead_id,
-                'sale': str(1000),
+                'sale': str(price.value),
                 'updated_at': str(int(time()) + 3600 * 4),
                 # 'pipeline_id': str(18324790),
                 'custom_fields': [

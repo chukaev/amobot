@@ -13,6 +13,7 @@ class User(models.Model):
     city = models.CharField(max_length=50, default='Москва')
     country = models.CharField(max_length=20, default='Россия')
     lead_id = models.CharField(max_length=20, null=True)
+    send_review = models.BooleanField(default=True)
 
 
 class TypeAction(models.Model):
