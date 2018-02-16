@@ -3,11 +3,11 @@ from bot import bot
 import requests
 from config import amo_user_host, amo_api_leads, amo_api_contact
 from .utils import authorize
-from .leads import create_lead
 
 
 def proceed_update(update):
     lead = _get_lead(update)
+    print(lead)
     if lead:
         print(lead)
         user = _get_user(lead)
@@ -18,10 +18,6 @@ def proceed_update(update):
         user.api_postfix += 1
         user.save()
         bot.send_message(user.id, action.text + text_problems)
-
-
-def proceed_new_contact(new_contact):
-    create_lead(new_contact)
 
 
 def _get_user(lead):
@@ -84,3 +80,4 @@ def _get_problems(amo_problems):
         except:
             pass
     return result
+

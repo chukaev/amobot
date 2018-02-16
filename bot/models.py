@@ -9,9 +9,10 @@ class User(models.Model):
     first_name = models.CharField(max_length=50)
     state = models.IntegerField(default=1)
     api_postfix = models.IntegerField(default=0)
-    username = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-    country = models.CharField(max_length=20)
+    username = models.CharField(max_length=50, default='Пусто')
+    city = models.CharField(max_length=50, default='Москва')
+    country = models.CharField(max_length=20, default='Россия')
+    lead_id = models.CharField(max_length=20)
 
 
 class TypeAction(models.Model):

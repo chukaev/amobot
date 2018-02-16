@@ -2,42 +2,45 @@ from bot.models import User
 from config import pipeline_id, amo_api_leads, amo_user_host
 import requests
 from .utils import authorize
+from time import time
 
 
-def create_lead(contact):
-    user = _get_user(contact)
+def update_lead(user):
     data = {
-        'add': [{
-            'name': str(user.username),
-            'status_id': 143,
-            'pipeline_id': pipeline_id,
-            'contact_id': contact['id'],
-            'sale': 1000,
-            'custom_fields': [
-                {
-                    'id': '4399655',
-                    'values': [
-                        {
-                            'value': user.city,
-                            'subtype': 'city'
-                        },
-                        {
-                            'value': user.country,
-                            'subtype': 'country'
-                        }
-                    ]
-                },
-                {
-                    'id': '1234567',
-                    'values': [
-                        {
-                            'value': user.username,
-                        },
-                    ]
-                }
-
-            ]
-        }]
+        'update': [
+            {
+                'id': user.lead_id,
+                'sale': str(1000),
+                'updated_at': str(int(time()) + 3600 * 4),
+                # 'pipeline_id': str(18324790),
+                'custom_fields': [
+                    {
+                        'id': 341835,
+                        'values': [
+                            {
+                                'value': user.country
+                            }
+                        ]
+                    },
+                    {
+                        'id': 341849,
+                        'values': [
+                            {
+                                'value': user.city
+                            }
+                        ]
+                    },
+                    {
+                        'id': 341851,
+                        'values': [
+                            {
+                                'value': user.username
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
     cookies = authorize()
     url = amo_user_host + amo_api_leads
