@@ -11,17 +11,20 @@ def proceed_update(update):
     if lead:
         print(lead)
         pipeline_id = lead['pipeline']['id']
+        print(pipeline_id)
         if pipeline_id == bot_pipeline:
             user = _get_user(lead)
             amo_type = _get_field(lead, 'Тип')[0]
             amo_problems = _get_field(lead, 'Проблема')
             action = TypeAction.objects.get(action_id=amo_type)
             text_problems = _get_problem_text(amo_problems)
+            print(3)
             try:
                 need_check = _get_field(lead, 'Проверка нужна')[0]
             except IndexError:
                 need_check = False
-            send = True if user.send_review else need_check=='1'
+            print(10)
+            send = True if user.send_review else need_check == '1'
             if send:
                 user.api_postfix += 1
                 user.send_review = False
