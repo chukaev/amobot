@@ -6,6 +6,7 @@ from time import time
 
 
 def update_lead(user):
+    print(user.__dict__)
     data = {
         'update': [
             {
