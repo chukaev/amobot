@@ -39,7 +39,7 @@ def payment_webhook(request):
 
 def get_file(request, file_id):
     url = telegram_file_link % (token, bot.get_file(file_id).file_path)
-    return redirect(url)
+    return render(request, 'video_file.html', context={'url': url})
 
 
 def amo_chat_webhook(request):
