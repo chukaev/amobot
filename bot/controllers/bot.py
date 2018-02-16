@@ -23,12 +23,10 @@ def existed_user_action(user, message):
 
 def choose_country(user, message):
     country_try = message.text
-    if country_try in countries:
-        user.country = countries[country_try]
-        user.state = 2
-        bot.send_message(user.id, ask_for_city, reply_markup=types.ReplyKeyboardRemove())
-    else:
-        bot.send_message(user.id, unknown_country)
+    user.country = country_try
+    user.state = 2
+    bot.send_message(user.id, ask_for_city, reply_markup=types.ReplyKeyboardRemove())
+
 
 
 def choose_city(user, message):
