@@ -18,6 +18,7 @@ from bot.controllers.question import question_edit
 
 
 def webhook(request):
+    print(10)
     data = json.loads(request.body.decode('utf-8'))
     update = telebot.types.Update.de_json(data)
     bot.process_new_updates([update])
