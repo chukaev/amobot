@@ -18,7 +18,6 @@ from bot.controllers.question import question_edit
 
 
 def webhook(request):
-    print(100500)
     data = json.loads(request.body.decode('utf-8'))
     update = telebot.types.Update.de_json(data)
     bot.process_new_updates([update])
@@ -26,7 +25,6 @@ def webhook(request):
 
 
 def payment_webhook(request):
-    print(request.GET)
     if request.method == 'POST':
         print(request.POST)
         try:
