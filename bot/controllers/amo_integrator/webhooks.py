@@ -14,13 +14,13 @@ def proceed_update(update):
         print(pipeline_id)
         if pipeline_id == bot_pipeline:
             user = _get_user(lead)
-            amo_type = _get_field(lead, 'Тип')[0]
-            amo_problems = _get_field(lead, 'Проблема')
+            amo_type = _get_field(lead, 'ATYPE')[0]
+            amo_problems = _get_field(lead, 'Гипотезы')
             action = TypeAction.objects.get(action_id=amo_type)
             text_problems = _get_problem_text(amo_problems)
             print(3)
             try:
-                need_check = _get_field(lead, 'Проверка нужна')[0]
+                need_check = _get_field(lead, 'проверка нужна?')[0]
             except IndexError:
                 need_check = False
             print(10)

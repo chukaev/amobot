@@ -17,7 +17,7 @@ def update_lead(user):
                 # 'pipeline_id': str(18324790),
                 'custom_fields': [
                     {
-                        'id': 341835,
+                        'id': 1774321,
                         'values': [
                             {
                                 'value': user.country
@@ -25,7 +25,7 @@ def update_lead(user):
                         ]
                     },
                     {
-                        'id': 341849,
+                        'id': 1772733,
                         'values': [
                             {
                                 'value': user.city
@@ -33,7 +33,7 @@ def update_lead(user):
                         ]
                     },
                     {
-                        'id': 341851,
+                        'id': 1774323,
                         'values': [
                             {
                                 'value': user.username
