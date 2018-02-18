@@ -83,6 +83,7 @@ def send_data(data):
     signature = hmac.new(amo_channel_secret.encode(), payload.encode(), 'sha1').hexdigest()
     headers = {'X-Signature': signature, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}
     r = requests.post(url=url, data=payload, headers=headers)
-    print(10)
+    print('send_data')
+    print(r.__dict__)
     print(r.text)
     return r.text, data
