@@ -23,6 +23,8 @@ def send_to_amo(user, message):
         body = get_body_from_media(message.document)
     else:
         body = 'Unknown type, show this to administrator\n' + str(message.__dict__)
+    print('body')
+    print(body)
     res = send_content(user, message, body)
 
 
