@@ -7,7 +7,6 @@ from bot.models import Price
 
 
 def update_lead(user):
-    print(user.__dict__)
     price = Price.objects.get(id=1)
     data = {
         'update': [

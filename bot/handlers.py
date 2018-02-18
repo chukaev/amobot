@@ -23,6 +23,7 @@ def main_handler(message):
     is_existed_user, user = get_user(message.from_user)
     if user.lead_id:
         update_lead(user)
+    print('send_to_amo')
     send_to_amo(user, message)
     if is_existed_user:
         existed_user_action(user, message)
