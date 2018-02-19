@@ -6,13 +6,13 @@ from time import time
 from bot.models import Price
 
 
-def update_lead(user):
+def update_lead(user, need_price = False):
     price = Price.objects.get(id=1)
     data = {
         'update': [
             {
                 'id': user.lead_id,
-                'sale': str(price.value),
+                # 'sale': str(price.value),
                 'updated_at': str(int(time()) + 3600 * 4),
                 # 'pipeline_id': str(18324790),
                 'custom_fields': [
@@ -44,6 +44,8 @@ def update_lead(user):
             }
         ]
     }
+    if need_price:
+        data['update'][0]['sale'] = str(price.value)
     cookies = authorize()
     url = amo_user_host + amo_api_leads
     r = requests.post(url, json=data, cookies=cookies)

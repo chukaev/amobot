@@ -27,7 +27,7 @@ def _accept(unsorted_lead):
 def _transfer_lead(lead_id, user):
     user.lead_id = lead_id
     user.save()
-    update_lead(user)
+    update_lead(user, need_price=True)
 
 
 def _accept_uid(uid):
