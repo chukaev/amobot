@@ -23,8 +23,6 @@ def send_to_amo(user, message):
         body = get_body_from_media(message.document)
     else:
         body = 'Unknown type, show this to administrator\n' + str(message.__dict__)
-    print('body')
-    print(body)
     res = send_content(user, message, body)
 
 
@@ -83,7 +81,4 @@ def send_data(data):
     signature = hmac.new(amo_channel_secret.encode(), payload.encode(), 'sha1').hexdigest()
     headers = {'X-Signature': signature, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache'}
     r = requests.post(url=url, data=payload, headers=headers)
-    print('send_data')
-    print(r.__dict__)
-    print(r.text)
     return r.text, data
