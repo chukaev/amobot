@@ -3,7 +3,7 @@ from messages import *
 from telebot import types
 from config import main_domain
 from django.urls import reverse
-from bot.models import Question
+from bot.models import Question, Price
 from bot.utils import countries
 
 
@@ -48,9 +48,9 @@ def video_action(user, message):
             user.state += 1
     else:
         if message.video or message.video_note or message.voice:
-
+            price = Price.objects.get(id=1)
             markup = types.InlineKeyboardMarkup()
             pay = types.InlineKeyboardButton(text=pay_button_text,
-                                         url=main_domain + '?id=%d&amount=%.2f' % (user.id, 1000))
+                                         url=main_domain + '?id=%d&amount=%.2f' % (user.id, price.value))
             markup.add(pay)
             bot.send_message(user.id, after_video_message % 1000, reply_markup=markup)
