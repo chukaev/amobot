@@ -1,8 +1,10 @@
-from config import token
 from django.conf.urls import url
 from bot.views import *
 from bot.models import TypeAction, ProblemAction
+from django.conf.urls import url
 
+from bot.models import TypeAction, ProblemAction
+from bot.views import *
 
 urlpatterns = [
     url(r'^' + token + '$', webhook, name='webhook'),
@@ -24,6 +26,9 @@ urlpatterns = [
 
     url(r'^question$', question_list, name='question_list'),
     url(r'^question/(?P<question_id>[0-9]+)/edit$', edit_question, name='edit_question'),
+
+    url(r'^message/$', messages_list, name='static_messages'),
+    url(r'^message/(?P<message_id>[0-9]+)/edit/', edit_message, name='edit_message'),
 
     url(r'amo/webhook$', amo_webhook, name='amo_webhook'),
     url(r'amo/webhook/delete$', amo_webhook, name='amo_delete_webhook'),

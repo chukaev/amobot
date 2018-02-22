@@ -5,53 +5,39 @@
         <div class="col-md-12">
             <div class="c-card c-card--responsive u-mb-medium">
                 <div class="c-field has-icon-right">
-                    {#                    <form method="get">#}
-                    {#                        <input class="c-input" type="text" name="id" placeholder="Искать по ID пользователя">#}
-                    {#                        <input type="submit" value="Искать по ID">#}
-                    {#                    </form>#}
+{#                    <form method="get">#}
+{#                        <input class="c-input" type="text" name="id" placeholder="Искать по ID пользователя">#}
+{#                        <input type="submit" value="Искать по ID">#}
+{#                    </form>#}
                 </div>
-                <div class="c-card__head">
-                    <h5 class="c-card__title">Действия</h5>
-                </div>
-
-                {% if type %}
                     <div class="c-card__head">
-                        <a href="{% url 'add_type_action' %}"><h5 class="c-card__title">Добавить тип</h5></a>
+                        <h5 class="c-card__title">Сообщения</h5>
                     </div>
-                {% else %}
-                    <div class="c-card__head">
-                        <a href="{% url 'add_problem_action' %}"><h5 class="c-card__title">Добавить проблему</h5></a>
-                    </div>{% endif %}
 
-                <table class="c-table u-border-zero">
-                    <thead>
-                    <tr>
-                        <th class="c-table__cell u-text-mute">Тип</th>
-                        <th class="c-table__cell">Текст</th>
+                    <table class="c-table u-border-zero">
+                        <thead>
+                        <tr>
+                            <th class="c-table__cell u-text-mute">Название</th>
+                            <th class="c-table__cell">Текст</th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for action in actions %}
-                        <tr class="c-table__row">
-                            <td class="c-table__cell">{{ action.action_id }}</td>
-                            <td class="c-table__cell">{{ action.text }}</td>
-                            <td class="c-table__cell u-text-right">
-                                {% if type %}
-                                    <a href="{% url 'edit_type_action' action.id %}"><span
-                                            class="c-badge c-badge--small c-badge--warning">Изменить</span></a>
-                                {% else %}
-                                    <a href="{% url 'edit_problem_action' action.id %}"><span
-                                            class="c-badge c-badge--small c-badge--warning">Изменить</span></a>
-                                {% endif %}
-                            </td>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                           {% for message in messages %}
+                                <tr class="c-table__row">
+                                <td class="c-table__cell">{{ message.name }}</td>
+                                <td class="c-table__cell">{{ message.text }}</td>
+                                <td class="c-table__cell u-text-right">
+                                    <a href="{% url 'edit_message' message.id %}"><span
+                                            class="c-badge c-badge--small c-badge--warning">Изменить</span></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
 
-    </div><!-- // .container -->
+        </div><!-- // .container -->
 {% endblock %}

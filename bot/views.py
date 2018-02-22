@@ -2,13 +2,14 @@ import json
 
 from django.contrib.auth.decorators import login_required
 
+from bot.controllers.message import message_edit
 from .handlers import * #it is needed for registering handlers
 
 import telebot
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 from bot import bot
-from bot.models import User, TypeAction, Price, Question
+from bot.models import User, TypeAction, Price, Question, StaticMessage
 from config import *
 from bot.controllers.payment import proceed_payment
 from bot.controllers.amo_integrator.webhooks import proceed_update
@@ -94,7 +95,7 @@ def action_list(request, Type):
     reurned_type = False
     if Type == TypeAction:
         reurned_type = True
-    return render(request, "messages.html", context={'actions': actions, 'type': reurned_type})
+    return render(request, "actions.html", context={'actions': actions, 'type': reurned_type})
 
 
 @login_required(login_url='login')
@@ -105,7 +106,7 @@ def edit_action(request, action_id, Type):
         status, error_message = action_edit(action, request.POST)
         if status:
             return redirect('index')
-    return render(request, 'edit_message.html', context={'error': error_message, 'action': action})
+    return render(request, 'edit_action.html', context={'error': error_message, 'action': action})
 
 
 @login_required(login_url='login')
@@ -115,7 +116,7 @@ def add_action(request, Type):
         status, error_message = action_add(request.POST, Type)
         if status:
             return redirect('index')
-    return render(request, 'edit_message.html', context={'error': error_message})
+    return render(request, 'edit_action.html', context={'error': error_message})
 
 
 @login_required(login_url='login')
@@ -153,3 +154,22 @@ def edit_question(request, question_id):
         if status:
             return redirect('question_list')
     return render(request, 'edit_question.html', context={'error': error_message, 'question': question})
+
+
+@login_required(login_url='login')
+def messages_list(request):
+    messages = StaticMessage.objects.all()
+    return render(request, 'messages.html', context={
+        'messages': messages
+    })
+
+
+@login_required(login_url='login')
+def edit_message(request, message_id):
+    message = get_object_or_404(StaticMessage, id=message_id)
+    error_message = None
+    if request.method == 'POST':
+        status, error_message = message_edit(message, request.POST)
+        if status:
+            return redirect('static_messages')
+    return render(request, 'edit_message.html', context={'error': error_message, 'message': message})

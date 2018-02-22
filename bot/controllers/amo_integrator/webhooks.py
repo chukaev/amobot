@@ -1,4 +1,4 @@
-from bot.models import User, TypeAction, ProblemAction
+from bot.models import User, TypeAction, ProblemAction, StaticMessage
 from bot import bot
 import requests
 from config import amo_user_host, amo_api_leads, amo_api_contact, bot_pipeline
@@ -17,19 +17,26 @@ def proceed_update(update):
             amo_type = _get_field(lead, 'ATYPE')[0]
             amo_problems = _get_field(lead, 'Гипотезы')
             action = TypeAction.objects.get(action_id=amo_type)
-            text_problems = _get_problem_text(amo_problems)
+            problems = _get_problems(amo_problems)
             print(3)
             try:
                 need_check = _get_field(lead, 'проверка нужна?')[0]
             except IndexError:
                 need_check = False
-            print(10)
-            send = True if user.send_review else need_check == '1'
+            send = False if need_check == '1' else user.send_review
             if send:
                 user.api_postfix += 1
                 user.send_review = False
                 user.save()
-                bot.send_message(user.id, action.text + text_problems)
+                hello_message = StaticMessage.objects.get(id=1)
+                last_message = StaticMessage.objects.get(id=2)
+
+                bot.send_message(user.id, hello_message.text, parse_mode='Markdown')
+                bot.send_message(user.id, action.text, parse_mode='Markdown')
+                for problem in problems:
+                    bot.send_message(user.id, problem.text, parse_mode='Markdown')
+                bot.send_message(user.id, last_message, parse_mode='Markdown')
+
 
 
 def _get_user(lead):

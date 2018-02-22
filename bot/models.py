@@ -32,3 +32,8 @@ class Price(models.Model):
 
 class Question(models.Model):
     text = models.TextField()
+
+
+class StaticMessage(models.Model):
+    name = models.CharField(max_length=30)
+    text = models.TextField()
