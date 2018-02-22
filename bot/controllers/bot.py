@@ -40,13 +40,13 @@ def choose_city(user, message):
 
 
 def video_action(user, message):
-    if user.state <= 6:
+    if user.state < 6:
         print('video')
         if message.video or message.video_note:
             question = Question.objects.get(id=user.state-1)
             bot.send_message(user.id, question.text)
             user.state += 1
-    elif user.state == 7:
+    elif user.state == 6:
         if message.video or message.video_note:
             price = Price.objects.get(id=1)
             markup = types.InlineKeyboardMarkup()
