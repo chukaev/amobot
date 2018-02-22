@@ -20,6 +20,7 @@ def proceed_update(update):
                 need_check = _get_field(lead, 'проверка нужна?')[0]
             except IndexError:
                 need_check = False
+            print(need_check)
             send = False if need_check == '1' else user.send_review
             if send:
                 user.api_postfix += 1
@@ -32,7 +33,7 @@ def proceed_update(update):
                 bot.send_message(user.id, action.text, parse_mode='Markdown')
                 for problem in problems:
                     bot.send_message(user.id, problem.text, parse_mode='Markdown')
-                bot.send_message(user.id, last_message, parse_mode='Markdown')
+                bot.send_message(user.id, last_message.text, parse_mode='Markdown')
 
 
 def _get_user(lead):
