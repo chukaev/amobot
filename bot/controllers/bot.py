@@ -16,7 +16,7 @@ def existed_user_action(user, message):
         choose_country(user, message)
     elif user.state == 2:
         choose_city(user, message)
-    elif 3 <= user.state <= 6:
+    else:
         video_action(user, message)
     user.save()
 
@@ -40,7 +40,7 @@ def choose_city(user, message):
 
 
 def video_action(user, message):
-    if user.state != 6:
+    if user.state <= 6:
         if message.video or message.video_note:
             question = Question.objects.get(id=user.state-1)
             bot.send_message(user.id, question.text)
