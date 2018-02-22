@@ -16,6 +16,7 @@ def proceed_update(update):
             amo_problems = _get_field(lead, 'Травмы')
             action = TypeAction.objects.get(action_id=amo_type)
             problems = _get_problems(amo_problems)
+            print(problems)
             try:
                 need_check = _get_field(lead, 'Проверка нужна?')[0]
             except IndexError:
