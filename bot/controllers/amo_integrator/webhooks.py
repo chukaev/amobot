@@ -7,18 +7,15 @@ from .utils import authorize
 
 def proceed_update(update):
     lead = _get_lead(update)
-    print(lead)
     if lead:
         print(lead)
         pipeline_id = lead['pipeline']['id']
-        print(pipeline_id)
         if pipeline_id == bot_pipeline:
             user = _get_user(lead)
             amo_type = _get_field(lead, 'ATYPE')[0]
-            amo_problems = _get_field(lead, 'Гипотезы')
+            amo_problems = _get_field(lead, 'Травмы')
             action = TypeAction.objects.get(action_id=amo_type)
             problems = _get_problems(amo_problems)
-            print(3)
             try:
                 need_check = _get_field(lead, 'проверка нужна?')[0]
             except IndexError:
@@ -36,7 +33,6 @@ def proceed_update(update):
                 for problem in problems:
                     bot.send_message(user.id, problem.text, parse_mode='Markdown')
                 bot.send_message(user.id, last_message, parse_mode='Markdown')
-
 
 
 def _get_user(lead):
