@@ -14,6 +14,8 @@ class User(models.Model):
     country = models.CharField(max_length=20, default='Россия')
     lead_id = models.CharField(max_length=20, null=True)
     send_review = models.BooleanField(default=True)
+    payed = models.BooleanField(default=False)
+
 
 
 class TypeAction(models.Model):

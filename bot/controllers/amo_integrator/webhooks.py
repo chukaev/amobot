@@ -1,8 +1,10 @@
+from bot.controllers.amo_integrator.api_requests import send_from_user
 from bot.models import User, TypeAction, ProblemAction, StaticMessage
 from bot import bot
 import requests
 from config import amo_user_host, amo_api_leads, amo_api_contact, bot_pipeline
 from .utils import authorize
+from messages import review_sent
 
 
 def proceed_update(update):
@@ -20,18 +22,22 @@ def proceed_update(update):
             except IndexError:
                 need_check = False
             send = False if need_check == '1' else user.send_review
-            if send:
-                # user.api_postfix += 1
-                user.send_review = False
-                user.save()
-                hello_message = StaticMessage.objects.get(id=1)
-                last_message = StaticMessage.objects.get(id=2)
+            if send and user.payed:
+                _send_review(action, problems, user)
+                send_from_user(user, review_sent)
 
-                bot.send_message(user.id, hello_message.text, parse_mode='Markdown')
-                bot.send_message(user.id, action.text, parse_mode='Markdown')
-                for problem in problems:
-                    bot.send_message(user.id, problem.text, parse_mode='Markdown')
-                bot.send_message(user.id, last_message.text, parse_mode='Markdown')
+
+def _send_review(action, problems, user):
+    user.send_review = False
+    user.save()
+    hello_message = StaticMessage.objects.get(id=1)
+    last_message = StaticMessage.objects.get(id=2)
+
+    bot.send_message(user.id, hello_message.text, parse_mode='Markdown')
+    bot.send_message(user.id, action.text, parse_mode='Markdown')
+    for problem in problems:
+        bot.send_message(user.id, problem.text, parse_mode='Markdown')
+    bot.send_message(user.id, last_message.text, parse_mode='Markdown')
 
 
 def _get_user(lead):
