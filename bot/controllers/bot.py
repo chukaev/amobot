@@ -28,7 +28,6 @@ def choose_country(user, message):
     bot.send_message(user.id, ask_for_city, reply_markup=types.ReplyKeyboardRemove())
 
 
-
 def choose_city(user, message):
     if message.text != '':
         user.city = message.text
@@ -42,15 +41,16 @@ def choose_city(user, message):
 
 def video_action(user, message):
     if user.state != 6:
-        if message.video or message.video_note or message.voice:
+        if message.video or message.video_note:
             question = Question.objects.get(id=user.state-1)
             bot.send_message(user.id, question.text)
             user.state += 1
-    else:
-        if message.video or message.video_note or message.voice:
+    elif user.state == 7:
+        if message.video or message.video_note:
             price = Price.objects.get(id=1)
             markup = types.InlineKeyboardMarkup()
             pay = types.InlineKeyboardButton(text=pay_button_text,
                                          url=main_domain + '?id=%d&amount=%.2f' % (user.id, price.value))
             markup.add(pay)
             bot.send_message(user.id, after_video_message % price.value, reply_markup=markup)
+            user.state = 8

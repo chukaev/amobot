@@ -8,7 +8,6 @@ from .utils import authorize
 def proceed_update(update):
     lead = _get_lead(update)
     if lead:
-        print(lead)
         pipeline_id = lead['pipeline']['id']
         if pipeline_id == bot_pipeline:
             user = _get_user(lead)
@@ -16,15 +15,13 @@ def proceed_update(update):
             amo_problems = _get_field(lead, 'Травмы')
             action = TypeAction.objects.get(action_id=amo_type)
             problems = _get_problems(amo_problems)
-            print(problems)
             try:
                 need_check = _get_field(lead, 'Проверка нужна?')[0]
             except IndexError:
                 need_check = False
-            print(need_check)
             send = False if need_check == '1' else user.send_review
             if send:
-                user.api_postfix += 1
+                # user.api_postfix += 1
                 user.send_review = False
                 user.save()
                 hello_message = StaticMessage.objects.get(id=1)

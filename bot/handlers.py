@@ -1,7 +1,6 @@
 from . import bot
 from bot.controllers.bot import existed_user_action
 from bot.controllers.user import get_user, new_user_action
-from .utils import  to_main_page
 from bot.controllers.amo_integrator.api_requests import send_to_amo
 from bot.controllers.amo_integrator.leads import update_lead
 
@@ -12,10 +11,9 @@ def handle_start(message):
     if user.lead_id:
         update_lead(user)
     if is_existed_user:
-        if user.state != 0:
-            to_main_page(user)
-        else:
-            new_user_action(user)
+        user.state = 1
+        new_user_action(user)
+        user.save()
 
 
 @bot.message_handler(content_types=['text', 'audio', 'video', 'video_note', 'voice'])
@@ -23,7 +21,6 @@ def main_handler(message):
     is_existed_user, user = get_user(message.from_user)
     if user.lead_id:
         update_lead(user)
-    print('send_to_amo')
     send_to_amo(user, message)
     if is_existed_user:
         existed_user_action(user, message)
