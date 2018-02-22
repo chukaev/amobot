@@ -2,8 +2,7 @@ from bot.models import User
 from telebot import types
 from bot import bot
 from messages import first_message
-from bot.utils import markup_for_country
-
+from django.core.exceptions import ObjectDoesNotExist
 
 def get_user(user):
     result = User.objects.filter(id=user.id).first()
@@ -32,3 +31,11 @@ def new_user_action(user):
     bot.send_message(user.id, first_message % user.first_name)
 
 
+def get_user_from_amo_request(receiver):
+    while len(receiver) > 4:
+        try:
+            user = User.objects.get(id=receiver)
+            return user
+        except ObjectDoesNotExist:
+            receiver = receiver[:-1]
+    return None

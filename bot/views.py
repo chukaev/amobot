@@ -15,6 +15,7 @@ from bot.controllers.amo_integrator.webhooks import proceed_update
 from bot.controllers.action import action_edit, action_add
 from bot.controllers.price import edit_price as price_edit
 from bot.controllers.question import question_edit
+from bot.controllers.user import get_user_from_amo_request
 
 
 def webhook(request):
@@ -44,10 +45,10 @@ def get_file(request, file_id):
 
 
 def amo_chat_webhook(request):
-    print(request.path)
     data = json.loads(request.body.decode())
-    print(data)
-    bot.send_message(data['receiver'], data['text'])
+    user = get_user_from_amo_request(data['receiver'])
+    if user:
+        bot.send_message(user.id, data['text'])
     return HttpResponse(content="Ok", status=200)
 
 
