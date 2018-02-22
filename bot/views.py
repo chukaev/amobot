@@ -20,7 +20,6 @@ from bot.controllers.user import get_user_from_amo_request
 
 
 def webhook(request):
-    print(10)
     data = json.loads(request.body.decode('utf-8'))
     update = telebot.types.Update.de_json(data)
     bot.process_new_updates([update])
@@ -30,7 +29,6 @@ def webhook(request):
 def payment_webhook(request):
     print(request.POST)
     if request.method == 'POST':
-        print(request.POST)
         try:
             proceed_payment(request.POST)
         except Exception as e:
@@ -57,7 +55,6 @@ def amo_webhook(request):
     # if request.method == 'POST':
         # data = json.loads(request.body.decode())
         # proceed_update(data)
-    print(request.POST)
 
     proceed_update(update=request.POST)
 

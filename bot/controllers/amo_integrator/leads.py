@@ -49,7 +49,6 @@ def update_lead(user, need_price = False):
     cookies = authorize()
     url = amo_user_host + amo_api_leads
     r = requests.post(url, json=data, cookies=cookies)
-    print(r.text)
 
 
 def _get_user(contact):
