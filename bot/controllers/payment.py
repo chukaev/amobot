@@ -18,6 +18,8 @@ def proceed_payment(post_dict):
             if user:
                 amount = float(post_dict['withdraw_amount'])
                 bot.send_message(user.id, payment_get % amount)
+                user.payed = True
+                user.save()
                 send_from_user(user, amo_payment_get % amount)
         else:
             print('unaccepted')
