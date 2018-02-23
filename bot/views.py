@@ -175,6 +175,7 @@ def edit_message(request, message_id):
 
 @login_required(login_url='login')
 def problem_appearance(request, problem_id):
+    print(problem_id)
     problem = get_object_or_404(ProblemAction, problem_id)
     appearance = ProblemAppearance.objects.filter(problem=problem).all()
     return render(request, "appearance.html", context={'problem': problem, 'appearances': appearance})
