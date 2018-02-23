@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post">
+        <table class="c-table u-border-zero">
+
+        <tbody>
+        <tr class="c-table__row" id="no_border">
+            <td class="c-table__cell" id="input__cell">{% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
+            </td>
+        </tr>
+        <select class="c-input" name="type_id">
+            {% for type in types %}
+                <option value="{{ type.id }}">{{ type.action_id }}</option>
+            {% endfor %}
+
+        </select>
+        <tr class="c-table__row" id="no_border">
+            <td class="c-table__cell" id="input__cell"><label>Введите текст<textarea class="c-input" name="text">{{ message.text }}</textarea> </label>
+            </td>
+        </tr>
+
+        <tr class="c-table__row" id="no_border">
+            <td class="c-table__cell" id="input__cell"><input type="submit">
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+    </form>
+
+
+{% endblock %}

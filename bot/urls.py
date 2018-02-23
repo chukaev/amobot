@@ -21,6 +21,12 @@ urlpatterns = [
     url(r'^problems/(?P<action_id>[0-9]+)/edit$', edit_action, {'Type': ProblemAction}, name='edit_problem_action'),
     url(r'^problems/add$', add_action, {'Type': ProblemAction}, name='add_problem_action'),
 
+    url(r'^problems/(?P<problem_id>[0-9]+)/appearance$', problem_appearance, name='problem_appearance'),
+    url(r'^problems/(?P<problem_id>[0-9]+)/appearance/add$', add_appearance, name='add_appearance'),
+    url(r'^problems/appearance/(?P<appearance_id>[0-9]+)/edit$', edit_appearance, name='edit_appearance'),
+    url(r'^problems/appearance/(?P<appearance_id>[0-9]+)/remove$', remove_appearance, name='remove_appearance'),
+
+
     url(r'^price$', price_list, name='price_list'),
     url(r'^price/(?P<price_id>[0-9]+)/edit$', edit_price, name='edit_price'),
 

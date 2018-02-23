@@ -2,7 +2,7 @@ import requests
 
 from bot import bot, telegraph
 from bot.controllers.amo_integrator.api_requests import send_from_user
-from bot.models import User, TypeAction, ProblemAction, StaticMessage
+from bot.models import User, TypeAction, ProblemAction, StaticMessage, ProblemAppearance
 from config import amo_user_host, amo_api_leads, amo_api_contact, bot_pipeline
 from messages import review_sent
 from .utils import authorize
@@ -76,6 +76,9 @@ def _create_review_page(hello_message, last_message, action, problems, user):
     ]
     for problem in problems:
         root_node.insert(4, {'tag': 'p', 'children':[problem.text]})
+        appearance = ProblemAppearance.objects.filter(problem_id=problem.id, type_action=action).first()
+        if appearance:
+            root_node.insert(4, {'tag': 'p', 'children': [appearance.text]})
     page = telegraph.create_page('Психологичесский обзор для %s' % user.username, root_node)
     return page['url']
 

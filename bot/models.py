@@ -17,7 +17,6 @@ class User(models.Model):
     payed = models.BooleanField(default=False)
 
 
-
 class TypeAction(models.Model):
     action_id = models.CharField(unique=True, max_length=40)
     text = models.TextField()
@@ -25,6 +24,12 @@ class TypeAction(models.Model):
 
 class ProblemAction(models.Model):
     action_id = models.CharField(unique=True, max_length=40)
+    text = models.TextField()
+
+
+class ProblemAppearance(models.Model):
+    type_action = models.ForeignKey(TypeAction)
+    problem = models.ForeignKey(ProblemAction)
     text = models.TextField()
 
 

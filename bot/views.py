@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 
+from bot.controllers.appearance import appearance_edit, appearance_add
 from bot.controllers.message import message_edit
 from .handlers import * #it is needed for registering handlers
 
@@ -9,7 +10,7 @@ import telebot
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 from bot import bot
-from bot.models import User, TypeAction, Price, Question, StaticMessage
+from bot.models import User, TypeAction, Price, Question, StaticMessage, ProblemAction, ProblemAppearance
 from config import *
 from bot.controllers.payment import proceed_payment
 from bot.controllers.amo_integrator.webhooks import proceed_update
@@ -39,7 +40,7 @@ def payment_webhook(request):
 
 
 def get_file(request, file_id):
-    url = telegram_file_link % (token, bot.get_file(file_id).file_path)
+    url = telegram_file_link % (bot_token, bot.get_file(file_id).file_path)
     return render(request, 'video_file.html', context={'url': url})
 
 
@@ -170,3 +171,34 @@ def edit_message(request, message_id):
         if status:
             return redirect('static_messages')
     return render(request, 'edit_message.html', context={'error': error_message, 'message': message})
+
+
+@login_required(login_url='login')
+def problem_appearance(request, problem_id):
+    problem = get_object_or_404(ProblemAction, problem_id)
+    appearance = ProblemAppearance.objects.filter(problem=problem).all()
+    return render(request, "appearance.html", context={'problem': problem, 'appearances': appearance})
+
+
+@login_required(login_url='login')
+def edit_appearance(request, appearance_id):
+    appearance = get_object_or_404(ProblemAppearance, appearance_id)
+    types = TypeAction.objects.all()
+    error_message = None
+    if request.method == 'POST':
+        status, error_message = appearance_edit(appearance, request.POST)
+        if status:
+            return redirect('problem_appearance', appearance.problem.id)
+    return render(request, 'edit_appearance.html', context={'types': types, 'error': error_message, 'appearance': appearance})
+
+
+@login_required(login_url='login')
+def add_appearance(request, problem_id):
+    problem = get_object_or_404(ProblemAction, problem_id)
+    types = TypeAction.objects.all()
+    error_message = None
+    if request.method == 'POST':
+        status, error_message = appearance_add(request.POST, problem)
+        if status:
+            return redirect('problem_appearance', problem_id)
+    return render(request, 'edit_appearance.html', context={'types': types, 'error': error_message})

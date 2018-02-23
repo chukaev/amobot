@@ -11,17 +11,12 @@
                     {#                    </form>#}
                 </div>
                 <div class="c-card__head">
-                    <h5 class="c-card__title">Действия</h5>
+                    <h5 class="c-card__title">Проявления {{ problem.action_id }}</h5>
                 </div>
 
-                {% if type %}
                     <div class="c-card__head">
-                        <a href="{% url 'add_type_action' %}"><h5 class="c-card__title">Добавить тип</h5></a>
+                        <a href="{% url 'add_appearance' problem.id %}"><h5 class="c-card__title">Добавить проявления</h5></a>
                     </div>
-                {% else %}
-                    <div class="c-card__head">
-                        <a href="{% url 'add_problem_action' %}"><h5 class="c-card__title">Добавить проблему</h5></a>
-                    </div>{% endif %}
 
                 <table class="c-table u-border-zero">
                     <thead>
@@ -32,27 +27,39 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for action in actions %}
                         <tr class="c-table__row">
-                            <td class="c-table__cell">{{ action.action_id }}</td>
-                            <td class="c-table__cell">{{ action.text }}</td>
+                            <td class="c-table__cell">{{ problem.action_id }}</td>
+                            <td class="c-table__cell">{{ problem.text }}</td>
                             <td class="c-table__cell u-text-right">
-                                {% if type %}
-                                    <a href="{% url 'edit_type_action' action.id %}"><span
+                                    <a href="{% url 'edit_type_action' problem.id %}"><span
                                             class="c-badge c-badge--small c-badge--warning">Изменить</span></a>
-                                {% else %}
-                                    <a href="{% url 'edit_problem_action' action.id %}"><span
-                                            class="c-badge c-badge--small c-badge--warning">Изменить</span></a>
-                                {% endif %}
-                            </td>
+                               </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="c-table u-border-zero">
+                    <thead>
+                    <tr>
+                        <th class="c-table__cell u-text-mute">Тип</th>
+                        <th class="c-table__cell">Текст</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for appearance in appearances %}
+                        <tr class="c-table__row">
+                            <td class="c-table__cell u-text-mute">{{ appearance.type_action.action_id }}</td>
+                            <td class="c-table__cell">{{ appearance.text }}</td>
                             <td class="c-table__cell u-text-right">
-                                {% if not type %}
-                                    <a href="{% url 'problem_appearance' action.id %}"><span
-                                            class="c-badge c-badge--small c-badge--success">Проявления</span></a>
-                                {% endif %}
+                                <a href="{% url 'edit_appearance' appearance.id %}"><span
+                                        class="c-badge c-badge--small c-badge--warning">Изменить</span></a>
                             </td>
                         </tr>
                     {% endfor %}
+
+
                     </tbody>
                 </table>
             </div>
