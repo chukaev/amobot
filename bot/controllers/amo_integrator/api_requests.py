@@ -41,7 +41,7 @@ def send_from_user(user, body):
             'conversation_id': 'c' + str(user.id) + str(user.api_postfix),
             'sender': {
                 'id': str(user.id) + str(api_implementation_version),
-                'avatar': telegram_file_link % (token, bot.get_file(photos[0][2].file_id).file_path),
+                'avatar': telegram_file_link % (bot_token, bot.get_file(photos[0][2].file_id).file_path),
                 'name': user.first_name.replace('.', '') + '.' + str(user.id),
             },
             'message': {
