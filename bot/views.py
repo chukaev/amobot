@@ -103,6 +103,7 @@ def edit_action(request, action_id, Type):
     if request.method == 'POST':
         status, error_message = action_edit(action, request.POST)
         if status:
+            print(Type.__class__)
             if Type.__class__ == TypeAction.__class__:
                 return redirect('types_list')
             else:
