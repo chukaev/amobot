@@ -176,14 +176,14 @@ def edit_message(request, message_id):
 @login_required(login_url='login')
 def problem_appearance(request, problem_id):
     print(problem_id)
-    problem = get_object_or_404(ProblemAction, problem_id)
+    problem = get_object_or_404(ProblemAction, id=problem_id)
     appearance = ProblemAppearance.objects.filter(problem=problem).all()
     return render(request, "appearance.html", context={'problem': problem, 'appearances': appearance})
 
 
 @login_required(login_url='login')
 def edit_appearance(request, appearance_id):
-    appearance = get_object_or_404(ProblemAppearance, appearance_id)
+    appearance = get_object_or_404(ProblemAppearance, id=appearance_id)
     types = TypeAction.objects.all()
     error_message = None
     if request.method == 'POST':
@@ -195,7 +195,7 @@ def edit_appearance(request, appearance_id):
 
 @login_required(login_url='login')
 def add_appearance(request, problem_id):
-    problem = get_object_or_404(ProblemAction, problem_id)
+    problem = get_object_or_404(ProblemAction, id=problem_id)
     types = TypeAction.objects.all()
     error_message = None
     if request.method == 'POST':
