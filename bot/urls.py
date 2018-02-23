@@ -7,7 +7,7 @@ from bot.models import TypeAction, ProblemAction
 from bot.views import *
 
 urlpatterns = [
-    url(r'^' + token + '$', webhook, name='webhook'),
+    url(r'^' + bot_token + '$', webhook, name='webhook'),
 
     url(r'file/(?P<file_id>.+)$', get_file, name='get_file'),
     url(r'amochat/' + 'test', amo_chat_webhook, name='amochat_webhook'),
