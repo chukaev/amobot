@@ -14,12 +14,15 @@
         </tr>
         <select class="c-input" name="type_id">
             {% for type in types %}
-                <option value="{{ type.id }}">{{ type.action_id }}</option>
+                <option value="{{ type.id }}" {% if type == appearance.type_action %}selected="selected"{% endif %}>{{ type.action_id }}</option>
             {% endfor %}
+
+
+{% endfor %}
 
         </select>
         <tr class="c-table__row" id="no_border">
-            <td class="c-table__cell" id="input__cell"><label>Введите текст<textarea class="c-input" name="text">{{ message.text }}</textarea> </label>
+            <td class="c-table__cell" id="input__cell"><label>Введите текст<textarea class="c-input" name="text">{{ appearance.text }}</textarea> </label>
             </td>
         </tr>
 
