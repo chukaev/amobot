@@ -199,7 +199,7 @@ def add_appearance(request, problem_id):
     types = TypeAction.objects.all()
     error_message = None
     if request.method == 'POST':
-        status, error_message = appearance_add(request.POST, problem)
+        status, error_message = appearance_add(request.POST, problem.id)
         if status:
             return redirect('problem_appearance', problem_id)
     return render(request, 'edit_appearance.html', context={'types': types, 'error': error_message})
