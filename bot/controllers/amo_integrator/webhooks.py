@@ -1,10 +1,11 @@
+import requests
+
+from bot import bot, telegraph
 from bot.controllers.amo_integrator.api_requests import send_from_user
 from bot.models import User, TypeAction, ProblemAction, StaticMessage
-from bot import bot
-import requests
 from config import amo_user_host, amo_api_leads, amo_api_contact, bot_pipeline
-from .utils import authorize
 from messages import review_sent
+from .utils import authorize
 
 
 def proceed_update(update):
@@ -32,12 +33,51 @@ def _send_review(action, problems, user):
     user.save()
     hello_message = StaticMessage.objects.get(id=1)
     last_message = StaticMessage.objects.get(id=2)
+    link = _create_review_page(hello_message, last_message, action, problems, user)
+    bot.send_message(user.id, link)
 
-    bot.send_message(user.id, hello_message.text, parse_mode='Markdown')
-    bot.send_message(user.id, action.text, parse_mode='Markdown')
+
+def _create_review_page(hello_message, last_message, action, problems, user):
+    root_node = [{
+        'tag': 'p',
+        'children': [
+            hello_message.text,
+        ]
+        },
+        {
+            'tag': 'h3',
+            'children': [
+                'Тип'
+            ]
+        },
+        {
+            'tag': 'p',
+            'children': [
+                action.text
+            ]
+        },
+        {
+            'tag': 'h3',
+            'children': [
+                'Проблемы'
+            ]
+        },
+
+        {
+            'tag': 'br',
+            'children': []
+        },
+        {
+            'tag': 'p',
+            'children': [
+                last_message.text
+            ]
+        },
+    ]
     for problem in problems:
-        bot.send_message(user.id, problem.text, parse_mode='Markdown')
-    bot.send_message(user.id, last_message.text, parse_mode='Markdown')
+        root_node.insert(4, {'tag': 'p', 'children':[problem.text]})
+    page = telegraph.create_page('Психологичесский обзор для %s' % user.username, root_node)
+    return page['url']
 
 
 def _get_user(lead):
@@ -100,4 +140,3 @@ def _get_problems(amo_problems):
         except:
             pass
     return result
-
