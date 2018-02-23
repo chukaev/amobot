@@ -11,13 +11,16 @@ from .utils import authorize
 def proceed_update(update):
     lead = _get_lead(update)
     if lead:
+        print(lead)
         pipeline_id = lead['pipeline']['id']
         if pipeline_id == bot_pipeline:
             user = _get_user(lead)
             amo_type = _get_field(lead, 'ATYPE')[0]
             amo_problems = _get_field(lead, 'Травмы')
+            print(amo_problems)
             action = TypeAction.objects.get(action_id=amo_type)
             problems = _get_problems(amo_problems)
+            print(problems)
             try:
                 need_check = _get_field(lead, 'Проверка нужна?')[0]
             except IndexError:

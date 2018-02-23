@@ -103,7 +103,10 @@ def edit_action(request, action_id, Type):
     if request.method == 'POST':
         status, error_message = action_edit(action, request.POST)
         if status:
-            return redirect('index')
+            if Type.__class__ == TypeAction.__class__:
+                return redirect('types_list')
+            else:
+                return redirect('problem_list')
     return render(request, 'edit_action.html', context={'error': error_message, 'action': action})
 
 
@@ -175,7 +178,6 @@ def edit_message(request, message_id):
 
 @login_required(login_url='login')
 def problem_appearance(request, problem_id):
-    print(problem_id)
     problem = get_object_or_404(ProblemAction, id=problem_id)
     appearance = ProblemAppearance.objects.filter(problem=problem).all()
     return render(request, "appearance.html", context={'problem': problem, 'appearances': appearance})
