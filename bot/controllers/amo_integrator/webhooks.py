@@ -24,8 +24,8 @@ def proceed_update(update):
                 need_check = False
             send = False if need_check == '1' else user.send_review
             if send and user.payed:
-                _send_review(action, problems, user)
-                send_from_user(user, review_sent)
+                link = _send_review(action, problems, user)
+                send_from_user(user, review_sent + ' ' + link)
 
 
 def _send_review(action, problems, user):
@@ -35,6 +35,7 @@ def _send_review(action, problems, user):
     last_message = StaticMessage.objects.get(id=2)
     link = _create_review_page(hello_message, last_message, action, problems, user)
     bot.send_message(user.id, link)
+    return link
 
 
 def _create_review_page(hello_message, last_message, action, problems, user):
