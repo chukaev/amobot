@@ -11,16 +11,13 @@ from .utils import authorize
 def proceed_update(update):
     lead = _get_lead(update)
     if lead:
-        print(lead)
         pipeline_id = lead['pipeline']['id']
         if pipeline_id == bot_pipeline:
             user = _get_user(lead)
             amo_type = _get_field(lead, 'ATYPE')[0]
             amo_problems = _get_field(lead, 'Травмы')
-            print(amo_problems)
             action = TypeAction.objects.get(action_id=amo_type)
             problems = _get_problems(amo_problems)
-            print(problems)
             try:
                 need_check = _get_field(lead, 'Проверка нужна?')[0]
             except IndexError:
@@ -77,11 +74,13 @@ def _create_review_page(hello_message, last_message, action, problems, user):
             ]
         },
     ]
+    problems_node_list = []
     for problem in problems:
-        root_node.insert(4, {'tag': 'p', 'children':[problem.text]})
+        problems_node_list.append({'tag': 'p', 'children': [problem.text]})
         appearance = ProblemAppearance.objects.filter(problem_id=problem.id, type_action=action).first()
         if appearance:
-            root_node.insert(4, {'tag': 'p', 'children': [appearance.text]})
+            problems_node_list.append({'tag': 'p', 'children': [appearance.text]})
+    root_node = root_node[:4] + problems_node_list + root_node[4:]
     page = telegraph.create_page('Психологичесский обзор для %s' % user.username, root_node)
     return page['url']
 
