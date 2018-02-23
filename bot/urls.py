@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^problems/(?P<problem_id>[0-9]+)/appearance$', problem_appearance, name='problem_appearance'),
     url(r'^problems/(?P<problem_id>[0-9]+)/appearance/add$', add_appearance, name='add_appearance'),
     url(r'^problems/appearance/(?P<appearance_id>[0-9]+)/edit$', edit_appearance, name='edit_appearance'),
-    url(r'^problems/appearance/(?P<appearance_id>[0-9]+)/remove$', remove_appearance, name='remove_appearance'),
 
 
     url(r'^price$', price_list, name='price_list'),
