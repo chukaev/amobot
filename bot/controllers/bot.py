@@ -11,7 +11,6 @@ def existed_user_action(user, message):
     # if user.state == 1:
     #     main_menu_action(user, message) # Function to implement
     # user.save()
-    print('income')
     if user.state == 1:
         choose_country(user, message)
     elif user.state == 2:

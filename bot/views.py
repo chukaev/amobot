@@ -21,6 +21,7 @@ from bot.controllers.user import get_user_from_amo_request
 
 
 def webhook(request):
+    print('income')
     data = json.loads(request.body.decode('utf-8'))
     update = telebot.types.Update.de_json(data)
     bot.process_new_updates([update])
