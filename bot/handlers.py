@@ -11,7 +11,7 @@ def handle_start(message):
     if user.lead_id:
         update_lead(user)
     if is_existed_user:
-        user.state = 1
+        user.state = 3
         new_user_action(user)
         user.save()
 
