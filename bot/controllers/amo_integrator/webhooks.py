@@ -87,7 +87,7 @@ def _create_review_page(hello_message, last_message, action, problems, user):
         appearance = ProblemAppearance.objects.filter(problem_id=problem.id, type_action=action).first()
         if appearance:
             problems_node_list.append({'tag': 'p', 'children': [appearance.text]})
-    root_node = root_node[:3] + problems_node_list + root_node[3:]
+    root_node = root_node[:4] + problems_node_list + root_node[4:]
     page = telegraph.create_page('Результаты типирования. ДКС.', root_node)
     return page['url']
 
