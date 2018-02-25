@@ -37,7 +37,7 @@ def _send_review(action, problems, user):
     link = _create_review_page(hello_message, last_message, action, problems, user)
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton(send_to_friend, switch_inline_query=link))
-    bot.send_message(user.id, link)
+    bot.send_message(user.id, link, markup)
     return link
 
 
