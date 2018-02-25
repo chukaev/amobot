@@ -7,7 +7,7 @@ class User(models.Model):
     id = models.IntegerField(primary_key=True)
     phone = models.CharField(null=True, max_length=40)
     first_name = models.CharField(max_length=50)
-    state = models.IntegerField(default=1)
+    state = models.IntegerField(default=3)
     api_postfix = models.IntegerField(default=0)
     username = models.CharField(max_length=50, default='Пусто')
     city = models.CharField(max_length=50, default='Москва')

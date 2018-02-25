@@ -1,7 +1,7 @@
-from bot.models import User
+from bot.models import User, Question
 from telebot import types
 from bot import bot
-from messages import first_message
+from messages import first_message, info_message
 from django.core.exceptions import ObjectDoesNotExist
 
 def get_user(user):
@@ -28,7 +28,9 @@ def new_user_action(user):
     # markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     # phone_button = types.KeyboardButton('Отправить номер телефона', request_contact=True)
     # markup.add(phone_button)
-    bot.send_message(user.id, first_message % user.first_name)
+    bot.send_message(user.id, info_message)
+    question = Question.objects.get(id=1)
+    bot.send_message(user.id, question.text)
 
 
 def get_user_from_amo_request(receiver):

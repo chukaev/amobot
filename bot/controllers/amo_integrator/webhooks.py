@@ -1,10 +1,11 @@
 import requests
+from telebot import types
 
 from bot import bot, telegraph
 from bot.controllers.amo_integrator.api_requests import send_from_user
 from bot.models import User, TypeAction, ProblemAction, StaticMessage, ProblemAppearance
-from config import amo_user_host, amo_api_leads, amo_api_contact, bot_pipeline
-from messages import review_sent
+from config import amo_user_host, amo_api_leads, amo_api_contact, bot_pipeline, telegram_file_link, bot_token
+from messages import review_sent, send_to_friend
 from .utils import authorize
 
 
@@ -34,16 +35,33 @@ def _send_review(action, problems, user):
     hello_message = StaticMessage.objects.get(id=1)
     last_message = StaticMessage.objects.get(id=2)
     link = _create_review_page(hello_message, last_message, action, problems, user)
+    markup = types.InlineKeyboardMarkup()
+    markup.add(types.InlineKeyboardButton(send_to_friend, switch_inline_query=link))
     bot.send_message(user.id, link)
     return link
 
 
 def _create_review_page(hello_message, last_message, action, problems, user):
-    root_node = [{
-        'tag': 'p',
-        'children': [
-            hello_message.text,
-        ]
+    photo = bot.get_user_profile_photos(user.id).photos[0][2]
+
+    root_node = [
+        {
+            'tag': 'p',
+            'children': [
+                'Привет, %s' % user.first_name,
+            ]
+        },
+        {
+            'tag': 'img',
+            'attrs': {
+                'src': telegram_file_link % (bot_token, bot.get_file(photo.file_id).file_path)
+            }
+        },
+        {
+            'tag': 'p',
+            'children': [
+                hello_message.text,
+            ]
         },
         {
             'tag': 'h3',

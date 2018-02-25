@@ -11,11 +11,11 @@ def existed_user_action(user, message):
     # if user.state == 1:
     #     main_menu_action(user, message) # Function to implement
     # user.save()
-    if user.state == 1:
-        choose_country(user, message)
-    elif user.state == 2:
-        choose_city(user, message)
-    else:
+    # if user.state == 1:
+    #     choose_country(user, message)
+    # elif user.state == 2:
+    #     choose_city(user, message)
+    if user.state >= 3:
         video_action(user, message)
     user.save()
 

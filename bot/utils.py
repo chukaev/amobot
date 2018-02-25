@@ -4,7 +4,7 @@ from telebot import types
 
 def to_main_page(user, message='✅'):
     # Here should be your code of main page
-    user.state = 1
+    user.state = 3
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     markup.add()
     bot.send_message(user.id, message, reply_markup=markup)
