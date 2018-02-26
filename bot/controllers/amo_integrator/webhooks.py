@@ -159,5 +159,5 @@ def _upload_telegraph_file(file):
                 'http://telegra.ph/upload',
                 files={'file': ('file', file, 'image/jpeg')}  # image/gif, image/jpeg, image/jpg, image/png, video/mp4
             )
-    link = 'http://telegraph/' + r.json()['src']
+    link = 'http://telegraph/' + r.json()[0]['src']
     return link
