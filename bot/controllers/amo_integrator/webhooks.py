@@ -43,7 +43,7 @@ def _send_review(action, problems, user):
 
 def _create_review_page(hello_message, last_message, action, problems, user):
     photo = bot.get_user_profile_photos(user.id).photos[0][2]
-
+    uploaded_user_photo = _upload_telegraph_file(bot.get_file(photo.file_id))
     root_node = [
         {
             'tag': 'p',
@@ -54,7 +54,7 @@ def _create_review_page(hello_message, last_message, action, problems, user):
         {
             'tag': 'img',
             'attrs': {
-                'src': telegram_file_link % (bot_token, bot.get_file(photo.file_id).file_path)
+                'src': uploaded_user_photo
             }
         },
         {
@@ -152,3 +152,12 @@ def _get_problems(amo_problems):
         except:
             pass
     return result
+
+
+def _upload_telegraph_file(file):
+    r = requests.post(
+                'http://telegra.ph/upload',
+                files={'file': ('file', file, 'image/jpeg')}  # image/gif, image/jpeg, image/jpg, image/png, video/mp4
+            )
+    link = 'http://telegraph/' + r.json()['src']
+    return link
