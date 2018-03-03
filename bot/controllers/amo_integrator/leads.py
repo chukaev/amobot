@@ -44,8 +44,8 @@ def update_lead(user, need_price = False):
             }
         ]
     }
-    if need_price:
-        data['update'][0]['sale'] = str(price.value)
+    # if need_price:
+    #     data['update'][0]['sale'] = str(price.value)
     cookies = authorize()
     url = amo_user_host + amo_api_leads
     r = requests.post(url, json=data, cookies=cookies)
