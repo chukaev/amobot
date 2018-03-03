@@ -24,7 +24,8 @@ def proceed_update(update):
             except IndexError:
                 need_check = False
             send = False if need_check == '1' else user.send_review
-            if send and user.payed:
+            # if send and user.payed:
+            if send:
                 link = _send_review(action, problems, user)
                 send_from_user(user, review_sent + ' ' + link)
 

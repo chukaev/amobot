@@ -49,10 +49,12 @@ def video_action(user, message):
             user.state += 1
     elif user.state == 6:
         if message.video or message.video_note:
-            price = Price.objects.get(id=1)
-            markup = types.InlineKeyboardMarkup()
-            pay = types.InlineKeyboardButton(text=pay_button_text,
-                                         url=main_domain + '?id=%d&amount=%.2f' % (user.id, price.value))
-            markup.add(pay)
-            bot.send_message(user.id, after_video_message % price.value, reply_markup=markup)
+            # price = Price.objects.get(id=1)
+            # markup = types.InlineKeyboardMarkup()
+            # pay = types.InlineKeyboardButton(text=pay_button_text,
+            #                              url=main_domain + '?id=%d&amount=%.2f' % (user.id, price.value))
+            # markup.add(pay)
+            # bot.send_message(user.id, after_video_message % price.value, reply_markup=markup)
+            bot.send_message(user.id, after_video_message)
+
             user.state = 8
