@@ -1,4 +1,4 @@
-from bot.models import User, Question
+from bot.models import User, Question, StaticMessage
 from telebot import types
 from bot import bot
 from messages import first_message, info_message
@@ -28,7 +28,8 @@ def new_user_action(user):
     # markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     # phone_button = types.KeyboardButton('Отправить номер телефона', request_contact=True)
     # markup.add(phone_button)
-    bot.send_message(user.id, info_message)
+    message = StaticMessage.objects.get(id=3)
+    bot.send_message(user.id, message.text)
     question = Question.objects.get(id=1)
     bot.send_message(user.id, question.text)
 
