@@ -58,3 +58,5 @@ def video_action(user, message):
             bot.send_message(user.id, after_video_message)
 
             user.state = 8
+
+

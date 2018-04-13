@@ -15,6 +15,14 @@ def handle_start(message):
         new_user_action(user)
         user.save()
 
+@bot.message_handler(content_types=['text', 'audio', 'video', 'video_note', 'voice'])
+def main_handler(message):
+    is_existed_user, user = get_user(message.from_user)
+    if user.lead_id:
+        update_lead(user)
+    send_to_amo(user, message)
+    if is_existed_user:
+        existed_user_action(user, message)
 
 @bot.message_handler(content_types=['text', 'audio', 'video', 'video_note', 'voice'])
 def main_handler(message):

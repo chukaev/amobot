@@ -3,6 +3,7 @@ from telebot import types
 from bot import bot
 from messages import first_message, info_message
 from django.core.exceptions import ObjectDoesNotExist
+import json
 
 def get_user(user):
     result = User.objects.filter(id=user.id).first()
@@ -29,7 +30,8 @@ def new_user_action(user):
     # phone_button = types.KeyboardButton('Отправить номер телефона', request_contact=True)
     # markup.add(phone_button)
     message = StaticMessage.objects.get(id=3)
-    bot.send_message(user.id, message.text)
+    buttons = generate_buttons(message.buttons)
+    bot.send_message(user.id, message.text, reply_markup=buttons)
     question = Question.objects.get(id=1)
     bot.send_message(user.id, question.text)
 
@@ -42,3 +44,11 @@ def get_user_from_amo_request(receiver):
         except ObjectDoesNotExist:
             receiver = receiver[:-1]
     return None
+
+
+def generate_buttons(buttons):
+    markup = types.InlineKeyboardMarkup()
+
+    for key, value in json.loads(buttons).items():
+        markup.add(types.InlineKeyboardButton(value, callback_data=key))
+    return markup
