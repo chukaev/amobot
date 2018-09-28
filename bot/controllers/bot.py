@@ -5,7 +5,8 @@ from config import main_domain
 from django.urls import reverse
 from bot.models import Question, Price
 from bot.utils import countries
-
+from bot.models import User, Question, StaticMessage
+from bot.controllers.user import generate_buttons
 
 def existed_user_action(user, message):
     # if user.state == 1:
@@ -17,6 +18,10 @@ def existed_user_action(user, message):
     #     choose_city(user, message)
     if user.state >= 3:
         video_action(user, message)
+    else:
+        new_message = StaticMessage.objects.get(id=int(message.query))
+        buttons = generate_buttons(new_message.buttons)
+        bot.send_message(user.id, new_message.text, reply_markup=buttons)
     user.save()
 
 
@@ -58,3 +63,5 @@ def video_action(user, message):
             bot.send_message(user.id, after_video_message)
 
             user.state = 8
+
+

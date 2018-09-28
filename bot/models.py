@@ -44,3 +44,4 @@ class Question(models.Model):
 class StaticMessage(models.Model):
     name = models.CharField(max_length=30)
     text = models.TextField()
+    buttons = models.TextField(verbose_name='Кнопки')
